@@ -12,3 +12,8 @@ Online Makerting server modules for SF18 project
 * Install Java 8
 * Install Redis 
 * Configure application
+
+### Referrence
+
+* https://console.cloud.google.com/apis/dashboard?organizationId=0&project=sf18-olm
+* https://developers.google.com/adwords/api/docs/common-errors#QuotaCheckError.DEVELOPER_TOKEN_NOT_APPROVED
