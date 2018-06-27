@@ -15,5 +15,7 @@ Online Makerting server modules for SF18 project
 
 ### Referrence
 
-* https://console.cloud.google.com/apis/dashboard?organizationId=0&project=sf18-olm
-* https://developers.google.com/adwords/api/docs/common-errors#QuotaCheckError.DEVELOPER_TOKEN_NOT_APPROVED
+* Console https://console.cloud.google.com/apis/dashboard?organizationId=0&project=sf18-olm
+* Common error https://developers.google.com/adwords/api/docs/common-errors
+* Report https://developers.google.com/adwords/api/docs/appendix/reports
+* Report Structure https://developers.google.com/adwords/api/docs/guides/zeroimpression-structure-reports#structure_reports
