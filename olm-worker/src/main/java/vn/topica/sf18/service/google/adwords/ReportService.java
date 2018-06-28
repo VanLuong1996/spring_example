@@ -12,6 +12,7 @@ import com.google.api.ads.adwords.lib.utils.ReportException;
 import com.google.api.ads.adwords.lib.utils.v201806.ReportDownloaderInterface;
 import com.google.api.ads.adwords.lib.utils.v201806.ReportQuery;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -20,42 +21,26 @@ import java.io.IOException;
 @Slf4j
 public class ReportService {
 
+    @Async
     public void getReport(String reportFile, AdWordsServicesInterface adWordsService, AdWordsSession session)
             throws ReportDownloadResponseException, ReportException, IOException {
 
-        // Create query.
         // Create query.
         ReportQuery query =
                 new ReportQuery.Builder()
                         .fields(
                                 "Date",
-                                "Campaign",
+                                "CampaignName",
                                 "CampaignId",
                                 "AccountCurrencyCode",
                                 "Impressions",
                                 "Clicks",
-                                "Cost", //amount
-                                "Month",
-                                "Year")
-                        .from(ReportDefinitionReportType.CRITERIA_PERFORMANCE_REPORT)
-                        .where("Status").in("ENABLED", "PAUSED")
+                                "Cost" //amount
+                        )
+                        .from(ReportDefinitionReportType.CAMPAIGN_PERFORMANCE_REPORT)
+                        .where("Cost").greaterThan(0)
                         .during(ReportDefinitionDateRangeType.YESTERDAY)
                         .build();
-//        ReportQuery query =
-//                new ReportQuery.Builder()
-//                        .fields(
-//                                "CampaignId",
-//                                "AdGroupId",
-//                                "Id",
-//                                "Criteria",
-//                                "CriteriaType",
-//                                "Impressions",
-//                                "Clicks",
-//                                "Cost")
-//                        .from(ReportDefinitionReportType.CRITERIA_PERFORMANCE_REPORT)
-//                        .where("Status").in("ENABLED", "PAUSED")
-//                        .during(ReportDefinitionDateRangeType.YESTERDAY)
-//                        .build();
 
         // Optional: Set the reporting configuration of the session to suppress header, column name, or
         // summary rows in the report output. You can also configure this via your ads.properties

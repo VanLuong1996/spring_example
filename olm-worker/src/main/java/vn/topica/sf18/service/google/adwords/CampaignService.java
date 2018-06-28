@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -37,9 +38,7 @@ public class CampaignService {
 
             // Display campaigns.
             if (page.getEntries() != null) {
-                for (Campaign campaign : page.getEntries()) {
-                    campaigns.add(campaign);
-                }
+                campaigns.addAll(Arrays.asList(page.getEntries()));
             } else {
                 log.info("No campaigns were found.");
             }

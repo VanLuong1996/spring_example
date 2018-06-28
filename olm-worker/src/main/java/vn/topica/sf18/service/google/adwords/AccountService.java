@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -33,7 +34,7 @@ public class AccountService {
         int offset = 0;
         SelectorBuilder selectorBuilder =
                 new SelectorBuilder()
-                        .fields(ManagedCustomerField.CustomerId, ManagedCustomerField.Name)
+                        .fields(ManagedCustomerField.CustomerId, ManagedCustomerField.Name, ManagedCustomerField.CanManageClients)
                         .offset(offset)
                         .limit(PAGE_SIZE);
 
@@ -44,9 +45,7 @@ public class AccountService {
 
             if (page.getEntries() != null) {
                 // Create account tree nodes for each customer.
-                for (ManagedCustomer customer : page.getEntries()) {
-                    accounts.add(customer);
-                }
+                accounts.addAll(Arrays.asList(page.getEntries()));
             }
             offset += PAGE_SIZE;
             selectorBuilder.increaseOffsetBy(PAGE_SIZE);

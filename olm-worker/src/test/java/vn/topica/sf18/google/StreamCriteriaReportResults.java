@@ -12,19 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package vn.topica.sf18;
+package vn.topica.sf18.google;
 
 import static com.google.api.ads.common.lib.utils.Builder.DEFAULT_CONFIGURATION_FILENAME;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.api.ads.adwords.axis.factory.AdWordsServices;
 import com.google.api.ads.adwords.lib.client.AdWordsSession;
 import com.google.api.ads.adwords.lib.client.reporting.ReportingConfiguration;
 import com.google.api.ads.adwords.lib.factory.AdWordsServicesInterface;
 import com.google.api.ads.adwords.lib.jaxb.v201806.DownloadFormat;
-import com.google.api.ads.adwords.lib.jaxb.v201806.ReportDefinition;
-import com.google.api.ads.adwords.lib.jaxb.v201806.ReportDefinitionDateRangeType;
-import com.google.api.ads.adwords.lib.jaxb.v201806.ReportDefinitionReportType;
-import com.google.api.ads.adwords.lib.jaxb.v201806.Selector;
 import com.google.api.ads.adwords.lib.utils.DetailedReportDownloadResponseException;
 import com.google.api.ads.adwords.lib.utils.ReportDownloadResponse;
 import com.google.api.ads.adwords.lib.utils.ReportDownloadResponseException;
@@ -36,17 +33,26 @@ import com.google.api.ads.common.lib.conf.ConfigurationLoadException;
 import com.google.api.ads.common.lib.exception.OAuthException;
 import com.google.api.ads.common.lib.exception.ValidationException;
 import com.google.api.client.auth.oauth2.Credential;
-import java.io.File;
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Maps;
+import com.google.common.primitives.Longs;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Arrays;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Map;
+import org.apache.commons.lang.SystemUtils;
 
 /**
- * This example downloads a criteria performance report.
+ * This example streams the results of an ad hoc report, collecting total impressions
+ * by campaign from each line. This demonstrates how you can extract data from a large
+ * report without holding the entire result set in memory or using files.
  *
  * <p>Credentials and properties in {@code fromFile()} are pulled from the
  * "ads.properties" file. See README for more info.
  */
-public class DownloadCriteriaReportWithSelector {
+public class StreamCriteriaReportResults {
 
   public static void main(String[] args) {
     AdWordsSession session;
@@ -82,11 +88,8 @@ public class DownloadCriteriaReportWithSelector {
 
     AdWordsServicesInterface adWordsServices = AdWordsServices.getInstance();
 
-    // Location to download report to.
-    String reportFile = System.getProperty("user.home") + File.separatorChar + "report.csv";
-
     try {
-      runExample(adWordsServices, session, reportFile);
+      runExample(adWordsServices, session);
     } catch (DetailedReportDownloadResponseException dre) {
       // A DetailedReportDownloadResponseException will be thrown if the HTTP status code in the
       // response indicates an error occurred and the response body contains XML with further
@@ -106,10 +109,10 @@ public class DownloadCriteriaReportWithSelector {
       // A ReportException will be thrown if the download failed due to a transport layer exception.
       System.err.printf("Report was not downloaded due to transport layer exception: %s%n", re);
     } catch (IOException ioe) {
-      // An IOException in this example indicates that the report's contents could not be written
-      // to the output file.
+      // An IOException in this example indicates that the report's contents could not be read from
+      // the response.
       System.err.printf(
-          "Report was not written to file %s due to an IOException: %s%n", reportFile, ioe);
+          "Report was not read due to an IOException: %s%n", ioe);
     }
   }
 
@@ -118,36 +121,22 @@ public class DownloadCriteriaReportWithSelector {
    *
    * @param adWordsServices the services factory.
    * @param session the session.
-   * @param reportFile the output file for the report contents.
    * @throws DetailedReportDownloadResponseException if the report request failed with a detailed
    *     error from the reporting service.
    * @throws ReportDownloadResponseException if the report request failed with a general error from
    *     the reporting service.
    * @throws ReportException if the report request failed due to a transport layer error.
-   * @throws IOException if the report's contents could not be written to {@code reportFile}.
+   * @throws IOException if the report's contents could not be read from the response.
    */
-  public static void runExample(
-      AdWordsServicesInterface adWordsServices, AdWordsSession session, String reportFile)
-      throws ReportDownloadResponseException, ReportException, IOException {
-    // Create selector.
-    Selector selector = new Selector();
-    selector.getFields().addAll(Arrays.asList("CampaignId",
-        "AdGroupId",
-        "Id",
-        "CriteriaType",
-        "Criteria",
-        "FinalUrls",
-        "Impressions",
-        "Clicks",
-        "Cost"));
+  public static void runExample(AdWordsServicesInterface adWordsServices, AdWordsSession session)
+      throws ReportDownloadResponseException, ReportException, IOException  {
+    // Create the query.
+    String query =
+        "SELECT Id, AdNetworkType1, Impressions "
+            + "FROM CRITERIA_PERFORMANCE_REPORT "
+            + "WHERE Status IN [ENABLED, PAUSED] "
+            + "DURING LAST_7_DAYS";
 
-    // Create report definition.
-    ReportDefinition reportDefinition = new ReportDefinition();
-    reportDefinition.setReportName("Criteria performance report #" + System.currentTimeMillis());
-    reportDefinition.setDateRangeType(ReportDefinitionDateRangeType.YESTERDAY);
-    reportDefinition.setReportType(ReportDefinitionReportType.CRITERIA_PERFORMANCE_REPORT);
-    reportDefinition.setDownloadFormat(DownloadFormat.CSV);
-    
     // Optional: Set the reporting configuration of the session to suppress header, column name, or
     // summary rows in the report output. You can also configure this via your ads.properties
     // configuration file. See AdWordsSession.Builder.from(Configuration) for details.
@@ -155,25 +144,61 @@ public class DownloadCriteriaReportWithSelector {
     // rows.
     ReportingConfiguration reportingConfiguration =
         new ReportingConfiguration.Builder()
-            .skipReportHeader(false)
-            .skipColumnHeader(false)
-            .skipReportSummary(false)
-            // Enable to allow rows with zero impressions to show.
+            // Skip all header and summary lines since the loop below expects
+            // every field to be present in each line.
+            .skipReportHeader(true)
+            .skipColumnHeader(true)
+            .skipReportSummary(true)
+            // Enable to include rows with zero impressions.
             .includeZeroImpressions(false)
             .build();
     session.setReportingConfiguration(reportingConfiguration);
-    
-    reportDefinition.setSelector(selector);
 
     ReportDownloaderInterface reportDownloader =
         adWordsServices.getUtility(session, ReportDownloaderInterface.class);
 
-    // Set the property api.adwords.reportDownloadTimeout or call
-    // ReportDownloader.setReportDownloadTimeout to set a timeout (in milliseconds)
-    // for CONNECT and READ in report downloads.
-    ReportDownloadResponse response = reportDownloader.downloadReport(reportDefinition);
-    response.saveToFile(reportFile);
+    BufferedReader reader = null;
+    try {
+      // Set the property api.adwords.reportDownloadTimeout or call
+      // ReportDownloader.setReportDownloadTimeout to set a timeout (in milliseconds)
+      // for CONNECT and READ in report downloads.
+      final ReportDownloadResponse response =
+          reportDownloader.downloadReport(query, DownloadFormat.CSV);
+      
+      // Read the response as a BufferedReader.
+      reader = new BufferedReader(new InputStreamReader(response.getInputStream(), UTF_8));
 
-    System.out.printf("Report successfully downloaded to: %s%n", reportFile);
+      // Map to store total impressions by ad network type 1.
+      Map<String, Long> impressionsByAdNetworkType1 = Maps.newTreeMap();
+
+      // Stream the results one line at a time and perform any line-specific processing.
+      String line;
+      Splitter splitter = Splitter.on(',');
+      while ((line = reader.readLine()) != null) {
+        System.out.println(line);
+
+        // Split the line into a list of field values.
+        List<String> values = splitter.splitToList(line);
+
+        // Update the total impressions for the ad network type 1 value.
+        String adNetworkType1 = values.get(1);
+        Long impressions = Longs.tryParse(values.get(2));
+        if (impressions != null) {
+          Long impressionsTotal = impressionsByAdNetworkType1.get(adNetworkType1);
+          impressionsTotal = impressionsTotal == null ? 0L : impressionsTotal;
+          impressionsByAdNetworkType1.put(adNetworkType1, impressionsTotal + impressions);
+        }
+      }
+
+      // Print the impressions totals by ad network type 1.
+      System.out.println();
+      System.out.printf(
+          "Total impressions by ad network type 1:%n%s%n",
+          Joiner.on(SystemUtils.LINE_SEPARATOR).join(impressionsByAdNetworkType1.entrySet()));
+    } finally {
+      if (reader != null) {
+        reader.close();
+      }
+    }
   }
 }

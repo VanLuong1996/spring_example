@@ -1,4 +1,4 @@
-package vn.topica.sf18;
+package vn.topica.sf18.google;
 
 import static com.google.api.ads.common.lib.utils.Builder.DEFAULT_CONFIGURATION_FILENAME;
 
