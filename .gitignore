@@ -35,3 +35,6 @@ nbdist/
 **/elasticsearch/**
 **/logs/**
 **/target/**
+
+**/ads.properties
+**/application.properties
