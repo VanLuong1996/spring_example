@@ -25,20 +25,20 @@ public class SyncFacebookMarketing {
     private APIContext context;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         context = new APIContext(accessToken, appSecret).enableDebug(enableDebug);
     }
 
     @Scheduled(cron = "${app.scheduler.sync.facebookAds}")
     public void syncData() {
-        try{
+        try {
             APIRequest<AdAccount> request = new APIRequest<AdAccount>(context, "me", "/adaccounts", "GET", AdAccount.getParser());
 
             int accountPageIndex = 1;
-            APINodeList<AdAccount> accounts = (APINodeList<AdAccount>)(request.execute());
-            while (accounts != null){
+            APINodeList<AdAccount> accounts = (APINodeList<AdAccount>) (request.execute());
+            while (accounts != null) {
                 log.info("page {}, accounts {}", accountPageIndex, accounts.size());
-                for(AdAccount adAccount: accounts){
+                for (AdAccount adAccount : accounts) {
                     log.info("adAccount {}", adAccount);
 
 //                    exploreAccount(adAccount);
@@ -47,7 +47,7 @@ public class SyncFacebookMarketing {
                 accounts = accounts.nextPage();
                 ++accountPageIndex;
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             log.error(ExceptionUtils.getFullStackTrace(ex));
         }
     }
@@ -63,10 +63,10 @@ public class SyncFacebookMarketing {
         }
     }
 
-    private void exploreCampaign(Campaign campaign) throws APIException{
+    private void exploreCampaign(Campaign campaign) throws APIException {
         APINodeList<AdsInsights> adsInsights = campaign.getInsights().requestAllFields().execute();
-        while (adsInsights != null){
-            for(AdsInsights adsInsight: adsInsights){
+        while (adsInsights != null) {
+            for (AdsInsights adsInsight : adsInsights) {
                 log.info("adsInsight {}", adsInsight);
             }
 

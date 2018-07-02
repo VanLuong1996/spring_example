@@ -19,7 +19,7 @@ public class CampaignService {
 
     private static final int PAGE_SIZE = 100;
 
-    public List<Campaign> getAllCampaigns(AdWordsServicesInterface adWordsServices, AdWordsSession session) throws RemoteException{
+    public List<Campaign> getAllCampaigns(AdWordsServicesInterface adWordsServices, AdWordsSession session) throws RemoteException {
         List<Campaign> campaigns = new ArrayList<>();
 
         // Get the CampaignService.

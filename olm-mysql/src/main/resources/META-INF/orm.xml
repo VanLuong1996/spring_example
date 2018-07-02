@@ -1,0 +1,76 @@
+<entity-mappings>
+    <schema name="olm" />
+
+    <entity class="vn.topica.sf18.model.admin.AdminPermission" access="FIELD"  name="AdminPermission">
+        <table>admin_permission</table>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO" />
+            </id>
+            <basic name="name" />
+
+            <one-to-many name="adminRole">
+                <join-table name="admin_role_permission">
+                    <join-column name="id" referenced-column-name="permission_id"/>
+                </join-table>
+            </one-to-many>
+
+            <one-to-many name="adminUser">
+                <join-table name="admin_user_permission">
+                    <join-column name="id" referenced-column-name="permission_id"/>
+                </join-table>
+            </one-to-many>
+        </attributes>
+    </entity>
+
+    <entity class="vn.topica.sf18.model.admin.AdminRole" access="FIELD"  name="AdminRole">
+        <table>admin_role</table>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO" />
+            </id>
+            <basic name="name" />
+
+            <one-to-many name="adminPermission">
+                <join-table name="admin_role_permission">
+                    <join-column name="id" referenced-column-name="role_id"/>
+                </join-table>
+            </one-to-many>
+
+            <one-to-many name="adminUser">
+                <join-table name="admin_role_user">
+                    <join-column name="id" referenced-column-name="role_id"/>
+                </join-table>
+            </one-to-many>
+        </attributes>
+    </entity>
+
+    <entity class="vn.topica.sf18.model.admin.AdminUser" access="FIELD"  name="AdminUser">
+        <table>admin_role</table>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO" />
+            </id>
+            <basic name="email" />
+            <basic name="hashedPassword">
+                <column name="hashed_password"/>
+            </basic>
+            <basic name="username" />
+            <basic name="isActive" >
+                <column name="is_active"/>
+            </basic>
+
+            <one-to-many name="adminPermission">
+                <join-table name="admin_user_permission">
+                    <join-column name="id" referenced-column-name="user_id"/>
+                </join-table>
+            </one-to-many>
+
+            <one-to-many name="adminRole">
+                <join-table name="admin_role_user">
+                    <join-column name="id" referenced-column-name="user_id"/>
+                </join-table>
+            </one-to-many>
+        </attributes>
+    </entity>
+</entity-mappings>

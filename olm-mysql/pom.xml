@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>olm-api</artifactId>
+    <artifactId>olm-mysql</artifactId>
 
     <dependencies>
         <dependency>
@@ -17,27 +17,14 @@
             <artifactId>olm-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>vn.topica.sf18</groupId>
-            <artifactId>olm-mysql</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>net.friend</groupId>
+            <artifactId>common-spring-boot-generic-specification</artifactId>
+            <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>
 </project>

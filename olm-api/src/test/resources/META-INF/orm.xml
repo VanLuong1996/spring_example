@@ -1,0 +1,11 @@
+<entity-mappings>
+    <schema name="olm" />
+
+    <entity class="vn.topica.sf18.Author" access="FIELD"  name="Author">
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO" />
+            </id>
+        </attributes>
+    </entity>
+</entity-mappings>

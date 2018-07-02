@@ -33,24 +33,24 @@ public class SyncGoogleAdWords {
 
     @Scheduled(cron = "${app.scheduler.sync.googleAdWords}")
     public void syncData() {
-        try{
+        try {
             AdWordsServicesInterface adWordsService = authService.getAdWordsService();
             AdWordsSession adWordsSession = authService.getAdWordsSession();
 
             List<ManagedCustomer> accounts = accountService.getAllAccounts(adWordsService, adWordsSession);
             log.info("Number of accounts {}", accounts.size());
 
-            for(ManagedCustomer account: accounts){
+            for (ManagedCustomer account : accounts) {
                 log.info("Account {} {} {}", account.getCustomerId(), account.getName(), account.getCanManageClients());
 
-                if(account.getCanManageClients()){
+                if (account.getCanManageClients()) {
                     continue;
                 }
 
                 AdWordsSession adWordsAccountSession = authService.getAdWordsSession(Long.toString(account.getCustomerId()));
                 reportService.getReport(reportFolder + account.getCustomerId() + ".csv", adWordsService, adWordsAccountSession);
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             log.error(ExceptionUtils.getFullStackTrace(ex));
         }
     }

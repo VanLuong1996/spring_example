@@ -1,7 +1,6 @@
 package vn.topica.sf18.service.google.adwords;
 
 import com.google.api.ads.adwords.axis.utils.v201806.SelectorBuilder;
-import com.google.api.ads.adwords.axis.v201806.cm.ApiException;
 import com.google.api.ads.adwords.axis.v201806.mcm.ManagedCustomer;
 import com.google.api.ads.adwords.axis.v201806.mcm.ManagedCustomerPage;
 import com.google.api.ads.adwords.axis.v201806.mcm.ManagedCustomerServiceInterface;

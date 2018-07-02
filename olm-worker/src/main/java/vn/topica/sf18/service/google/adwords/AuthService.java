@@ -8,7 +8,8 @@ import com.google.api.ads.common.lib.exception.OAuthException;
 import com.google.api.ads.common.lib.exception.ValidationException;
 import com.google.api.client.auth.oauth2.Credential;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.configuration.*;
+import org.apache.commons.configuration.BaseConfiguration;
+import org.apache.commons.configuration.Configuration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -36,11 +37,11 @@ public class AuthService {
     @Value("${api.adwords.isPartialFailure}")
     private Boolean isPartialFailure;
 
-    public AdWordsSession getAdWordsSession(){
+    public AdWordsSession getAdWordsSession() {
         return getAdWordsSession(clientCustomerId);
     }
 
-    public AdWordsSession getAdWordsSession(String accountId){
+    public AdWordsSession getAdWordsSession(String accountId) {
         AdWordsSession session;
         try {
             // Generate a refreshable OAuth2 credential.
@@ -67,12 +68,12 @@ public class AuthService {
         return session;
     }
 
-    public AdWordsServicesInterface getAdWordsService(){
+    public AdWordsServicesInterface getAdWordsService() {
         AdWordsServicesInterface adWordsServices = AdWordsServices.getInstance();
         return adWordsServices;
     }
 
-    private Configuration initAdWordsConfiguration(String accountId){
+    private Configuration initAdWordsConfiguration(String accountId) {
         Configuration config = new BaseConfiguration();
         config.addProperty("api.adwords.clientCustomerId", accountId);
         config.addProperty("api.adwords.developerToken", developerToken);
@@ -81,7 +82,7 @@ public class AuthService {
         return config;
     }
 
-    private Configuration initOauthConfiguration(){
+    private Configuration initOauthConfiguration() {
         Configuration config = new BaseConfiguration();
         config.addProperty("api.adwords.refreshToken", refreshToken);
         config.setProperty("api.adwords.clientId", clientId);
