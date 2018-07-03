@@ -38,7 +38,7 @@
     </entity>
 
     <entity class="vn.topica.sf18.model.admin.AdminUser" access="FIELD"  name="AdminUser">
-        <table>admin_role</table>
+        <table>admin_user</table>
         <attributes>
             <id name="id">
                 <generated-value strategy="AUTO" />
@@ -62,6 +62,7 @@
         </attributes>
     </entity>
 
+
     <entity class="vn.topica.sf18.model.topica.dm4c.BaseDm4cModel">
         <inheritance strategy="TABLE_PER_CLASS"/>
         <attributes>
@@ -73,20 +74,21 @@
     </entity>
 
     <entity class="vn.topica.sf18.model.topica.dm4c.TopicaActivity" access="FIELD"  name="TopicaActivity">
-        <table>admin_activity</table>
+        <table>admin_dm4c_activity</table>
     </entity>
 
     <entity class="vn.topica.sf18.model.topica.dm4c.TopicaEstimator" access="FIELD"  name="TopicaEstimator">
-        <table>admin_estimator</table>
+        <table>admin_dm4c_estimator</table>
     </entity>
 
     <entity class="vn.topica.sf18.model.topica.dm4c.TopicaLegal" access="FIELD"  name="TopicaLegal">
-        <table>admin_legal</table>
+        <table>admin_dm4c_legal</table>
     </entity>
 
     <entity class="vn.topica.sf18.model.topica.dm4c.TopicaProduct" access="FIELD"  name="TopicaProduct">
-        <table>admin_product</table>
+        <table>admin_dm4c_product</table>
     </entity>
+
 
     <entity class="vn.topica.sf18.model.topica.TopicaCampaign" access="FIELD"  name="TopicaCampaign">
         <table>admin_campaign</table>
@@ -116,6 +118,66 @@
             <one-to-one name="activity">
                 <join-column name="hd"/>
             </one-to-one>
+        </attributes>
+    </entity>
+
+    <entity class="vn.topica.sf18.model.topica.TopicaCampaignData" access="FIELD"  name="TopicaCampaignData">
+        <table>admin_campaign_data</table>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO" />
+            </id>
+            <basic name="date" />
+            <basic name="source" />
+            <basic name="campaign" />
+            <basic name="campaignId" >
+                <column name="campaign_id"/>
+            </basic>
+            <basic name="account" />
+            <basic name="accountId" >
+                <column name="account_id"/>
+            </basic>
+            <basic name="currency" />
+            <basic name="impressions" />
+            <basic name="click" />
+            <basic name="amount" />
+            <basic name="dateMonth" >
+                <column name="date_month"/>
+            </basic>
+            <basic name="dateYear" >
+                <column name="date_year"/>
+            </basic>
+            <basic name="sp" />
+            <basic name="cdt" />
+            <basic name="pt" />
+            <basic name="hd" />
+        </attributes>
+    </entity>
+
+    <entity class="vn.topica.sf18.model.topica.TopicaImport" access="FIELD"  name="TopicaImport">
+        <table>admin_import</table>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO" />
+            </id>
+            <basic name="path" />
+            <basic name="url" />
+            <basic name="status" />
+            <basic name="type" />
+        </attributes>
+    </entity>
+
+    <entity class="vn.topica.sf18.model.topica.TopicaLog" access="FIELD"  name="TopicaLog">
+        <table>admin_log</table>
+        <attributes>
+            <id name="id">
+                <generated-value strategy="AUTO" />
+            </id>
+            <basic name="createdBy" >
+                <column name="created_by"/>
+            </basic>
+            <basic name="action" />
+            <basic name="description" />
         </attributes>
     </entity>
 </entity-mappings>
