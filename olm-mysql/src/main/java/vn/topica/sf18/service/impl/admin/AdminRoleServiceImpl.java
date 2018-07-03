@@ -11,7 +11,7 @@ import vn.topica.sf18.service.impl.BaseServiceImpl;
 import java.util.List;
 
 @AllArgsConstructor
-//@Service
+@Service
 @Slf4j
 public class AdminRoleServiceImpl extends BaseServiceImpl<AdminRole, Long> implements AdminRoleService {
 

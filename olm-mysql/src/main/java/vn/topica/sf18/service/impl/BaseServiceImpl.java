@@ -36,6 +36,6 @@ public class BaseServiceImpl<T, X> implements BaseService<T, X> {
         GenericSpecificationsBuilder<T> builder = new GenericSpecificationsBuilder<>();
         Function<SearchCriteria, Specification<T>> converter = BaseSpecification::new;
         Specification<T> spec = builder.build(converter, search);
-        return baseRepository.findAll(spec, PageRequest.of(pageIndex - 1, pageSize)).getContent();
+        return baseRepository.findAll(spec, new PageRequest(pageIndex - 1, pageSize)).getContent();
     }
 }

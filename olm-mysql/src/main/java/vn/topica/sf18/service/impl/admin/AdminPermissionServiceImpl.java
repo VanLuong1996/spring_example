@@ -8,7 +8,7 @@ import vn.topica.sf18.service.admin.AdminPermissionService;
 import vn.topica.sf18.service.impl.BaseServiceImpl;
 
 @AllArgsConstructor
-//@Service
+@Service
 @Slf4j
 public class AdminPermissionServiceImpl extends BaseServiceImpl<AdminPermission, Long> implements AdminPermissionService {
 

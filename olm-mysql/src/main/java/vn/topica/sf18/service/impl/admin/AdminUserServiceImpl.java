@@ -9,7 +9,7 @@ import vn.topica.sf18.service.admin.AdminUserService;
 import vn.topica.sf18.service.impl.BaseServiceImpl;
 
 @AllArgsConstructor
-//@Service
+@Service
 @Slf4j
 public class AdminUserServiceImpl extends BaseServiceImpl<AdminUser, Long> implements AdminUserService {
 
