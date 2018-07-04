@@ -4,7 +4,6 @@ import vn.topica.sf18.model.topica.TopicaCampaign;
 import vn.topica.sf18.service.BaseService;
 
 import java.util.List;
-import vn.topica.sf18.model.topica.TopicaImport;
 import vn.topica.sf18.model.topica.dm4c.TopicaActivity;
 import vn.topica.sf18.model.topica.dm4c.TopicaEstimator;
 import vn.topica.sf18.model.topica.dm4c.TopicaLegal;

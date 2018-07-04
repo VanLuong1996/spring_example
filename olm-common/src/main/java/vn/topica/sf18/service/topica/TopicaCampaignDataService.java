@@ -1,14 +1,8 @@
 package vn.topica.sf18.service.topica;
 
-import vn.topica.sf18.model.topica.TopicaCampaign;
+import java.util.List;
 import vn.topica.sf18.model.topica.TopicaCampaignData;
 import vn.topica.sf18.service.BaseService;
-
-import java.util.List;
-import vn.topica.sf18.model.topica.dm4c.TopicaActivity;
-import vn.topica.sf18.model.topica.dm4c.TopicaEstimator;
-import vn.topica.sf18.model.topica.dm4c.TopicaLegal;
-import vn.topica.sf18.model.topica.dm4c.TopicaProduct;
 
 public interface TopicaCampaignDataService extends BaseService<TopicaCampaignData> {
 
