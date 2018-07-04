@@ -1,4 +1,4 @@
-package vn.topica.sf18.utils.testFileImport;
+package vn.topica.sf18.utils.fileImport;
 
 import vn.topica.sf18.model.fileImport.FileColumnData;
 import vn.topica.sf18.service.fileImport.ImportFile;
