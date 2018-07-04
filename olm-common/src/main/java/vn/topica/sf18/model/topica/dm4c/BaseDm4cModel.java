@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BaseDm4cModel {
 
-    private int id;
+  private int id;
 
-    private String name;
+  private String name;
 }

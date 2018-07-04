@@ -5,37 +5,37 @@ import lombok.Data;
 @Data
 public class TopicaCampaignData {
 
-    private Long id;
+  private Long id;
 
-    private String date;
+  private String date;
 
-    private String source;
+  private String source;
 
-    private String campaign;
+  private String campaign;
 
-    private long campaignId;
+  private long campaignId;
 
-    private String account;
+  private String account;
 
-    private long accountId;
+  private long accountId;
 
-    private String currency;
+  private String currency;
 
-    private long impressions;
+  private long impressions;
 
-    private long click;
+  private long click;
 
-    private long amount;
+  private long amount;
 
-    private int dateMonth;
+  private int dateMonth;
 
-    private int dateYear;
+  private int dateYear;
 
-    private String sp;
+  private String sp;
 
-    private String cdt;
+  private String cdt;
 
-    private String pt;
+  private String pt;
 
-    private String hd;
+  private String hd;
 }

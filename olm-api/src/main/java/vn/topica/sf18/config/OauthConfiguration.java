@@ -79,13 +79,13 @@ public class OauthConfiguration extends WebSecurityConfigurerAdapter {
     http.antMatcher("/**")
         .addFilterBefore(ssoFilter(), UsernamePasswordAuthenticationFilter.class)
         .authorizeRequests()
-          .antMatchers("/api/login**", "/public/**", "/api/**")
+        .antMatchers("/api/login**", "/public/**", "/api/**")
         .permitAll()
         .anyRequest()
-          .authenticated()
+        .authenticated()
         .and()
-          .logout()
-            .logoutSuccessUrl("/").permitAll().and().csrf()
+        .logout()
+        .logoutSuccessUrl("/").permitAll().and().csrf()
         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
   }
 
@@ -97,7 +97,8 @@ public class OauthConfiguration extends WebSecurityConfigurerAdapter {
         "/api/login/google");
     OAuth2RestTemplate googleTemplate = new OAuth2RestTemplate(google(), oauth2ClientContext);
     googleFilter.setRestTemplate(googleTemplate);
-    UserInfoTokenServices tokenServices = new UserInfoTokenServices(googleResource().getUserInfoUri(), google().getClientId());
+    UserInfoTokenServices tokenServices = new UserInfoTokenServices(
+        googleResource().getUserInfoUri(), google().getClientId());
     tokenServices.setRestTemplate(googleTemplate);
     googleFilter.setTokenServices(tokenServices);
     googleFilter.setAuthenticationSuccessHandler(successHandler());
