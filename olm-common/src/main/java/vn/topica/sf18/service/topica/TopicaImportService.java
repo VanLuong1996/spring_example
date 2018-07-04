@@ -8,13 +8,6 @@ import vn.topica.sf18.service.BaseService;
 
 public interface TopicaImportService extends BaseService<TopicaImport> {
 
-  TopicaImport save(TopicaImport baseObject);
-
-  //region admin-on-rest
-  List<TopicaImport> findByIds(Long[] ids);
-
-  List<TopicaImport> filter(String search, Long userId, int pageIndex, int pageSize);
-
   TopicaImport getImportFileInfo(Long fileId);
 
   //import file

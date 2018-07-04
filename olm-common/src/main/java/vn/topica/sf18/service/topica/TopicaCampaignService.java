@@ -10,14 +10,6 @@ import vn.topica.sf18.model.topica.dm4c.TopicaLegal;
 import vn.topica.sf18.model.topica.dm4c.TopicaProduct;
 
 public interface TopicaCampaignService extends BaseService<TopicaCampaign> {
-
-  TopicaCampaign save(TopicaCampaign baseObject);
-
-  //region admin-on-rest
-  List<TopicaCampaign> findByIds(Long[] ids);
-
-  List<TopicaCampaign> filter(String search, Long userId, int pageIndex, int pageSize);
-
   TopicaCampaign getCampaignInfo(Long campaignId);
 
   //import file
