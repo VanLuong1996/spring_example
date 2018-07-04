@@ -1,4 +1,4 @@
-package vn.topica.sf18.model.fileImport;
+package vn.topica.sf18.excel.model;
 
 import java.util.ArrayList;
 import java.util.List;

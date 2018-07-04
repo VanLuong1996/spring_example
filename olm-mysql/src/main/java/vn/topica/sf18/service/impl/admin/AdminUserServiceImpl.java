@@ -32,16 +32,12 @@ public class AdminUserServiceImpl implements AdminUserService {
   }
 
   @Override
-  public List<AdminUser> findByIds(Long[] ids) {
-    return adminUserRepository.findByIds(ids);
+  public Iterable<AdminUser> findByIds(Iterable<Long> ids) {
+    return adminUserRepository.findAllById(ids);
   }
 
   @Override
   public List<AdminUser> filter(String search, Long userId, int pageIndex, int pageSize) {
-    GenericSpecificationsBuilder<AdminUser> builder = new GenericSpecificationsBuilder<>();
-    Function<SearchCriteria, Specification<AdminUser>> converter = BaseSpecification::new;
-    Specification<AdminUser> spec = builder.build(converter, search);
-    return adminUserRepository.findAll(spec, new PageRequest(pageIndex - 1, pageSize))
-        .getContent();
+    return adminUserRepository.filter(search, userId, pageIndex, pageSize);
   }
 }

@@ -18,7 +18,7 @@ public class TopicaCampaignServiceImpl implements TopicaCampaignService {
   }
 
   @Override
-  public List<TopicaCampaign> findByIds(Long[] ids) {
+  public Iterable<TopicaCampaign> findByIds(Iterable<Long> ids) {
     return null;
   }
 

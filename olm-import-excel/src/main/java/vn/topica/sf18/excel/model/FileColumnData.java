@@ -1,6 +1,6 @@
-package vn.topica.sf18.model.fileImport;
+package vn.topica.sf18.excel.model;
 
-import vn.topica.sf18.constant.FileColumn;
+import vn.topica.sf18.excel.constant.FileColumn;
 
 public class FileColumnData {
 

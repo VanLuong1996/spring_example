@@ -37,16 +37,12 @@ public class AdminRoleServiceImpl implements AdminRoleService {
   }
 
   @Override
-  public List<AdminRole> findByIds(Long[] ids) {
-    return adminRoleRepository.findByIds(ids);
+  public Iterable<AdminRole> findByIds(Iterable<Long> ids) {
+    return adminRoleRepository.findAllById(ids);
   }
 
   @Override
   public List<AdminRole> filter(String search, Long userId, int pageIndex, int pageSize) {
-    GenericSpecificationsBuilder<AdminRole> builder = new GenericSpecificationsBuilder<>();
-    Function<SearchCriteria, Specification<AdminRole>> converter = BaseSpecification::new;
-    Specification<AdminRole> spec = builder.build(converter, search);
-    return adminRoleRepository.findAll(spec, new PageRequest(pageIndex - 1, pageSize))
-        .getContent();
+    return adminRoleRepository.filter(search, userId, pageIndex, pageSize);
   }
 }

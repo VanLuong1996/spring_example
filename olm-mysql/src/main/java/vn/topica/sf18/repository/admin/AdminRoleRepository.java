@@ -4,12 +4,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import vn.topica.sf18.model.admin.AdminRole;
-import vn.topica.sf18.repository.BaseRepository;
+import vn.topica.sf18.repository.MyRepository;
 
 /**
- * Created by ico on 10/9/17.
+ *
  */
-public interface AdminRoleRepository extends BaseRepository<AdminRole, Long> {
+public interface AdminRoleRepository extends MyRepository<AdminRole, Long> {
 
   AdminRole findByName(String name);
 

@@ -4,7 +4,7 @@ import java.util.List;
 import vn.topica.sf18.model.admin.AdminRole;
 import vn.topica.sf18.service.BaseService;
 
-public interface AdminRoleService extends BaseService<AdminRole> {
+public interface AdminRoleService extends BaseService<AdminRole, Long> {
 
   AdminRole findByName(String name);
 

@@ -12,6 +12,7 @@
     <module>olm-worker</module>
     <module>olm-common</module>
     <module>olm-mysql</module>
+    <module>olm-import-excel</module>
   </modules>
   <packaging>pom</packaging>
 

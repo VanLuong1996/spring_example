@@ -1,9 +1,8 @@
-package vn.topica.sf18.service.fileImport;
-
-import vn.topica.sf18.constant.FileColumn;
-import vn.topica.sf18.model.fileImport.DataImport;
+package vn.topica.sf18.excel.service;
 
 import java.util.HashMap;
+import vn.topica.sf18.excel.constant.FileColumn;
+import vn.topica.sf18.excel.model.DataImport;
 
 public interface ImportFile {
     //mapping column with enum type

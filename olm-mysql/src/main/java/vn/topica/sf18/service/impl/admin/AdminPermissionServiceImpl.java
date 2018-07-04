@@ -1,5 +1,6 @@
 package vn.topica.sf18.service.impl.admin;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import lombok.AllArgsConstructor;
@@ -29,16 +30,12 @@ public class AdminPermissionServiceImpl implements AdminPermissionService {
   }
 
   @Override
-  public List<AdminPermission> findByIds(Long[] ids) {
+  public Iterable<AdminPermission> findByIds(Iterable<Long> ids) {
     return adminPermissionRepository.findAllById(ids);
   }
 
   @Override
   public List<AdminPermission> filter(String search, Long userId, int pageIndex, int pageSize) {
-    GenericSpecificationsBuilder<AdminPermission> builder = new GenericSpecificationsBuilder<>();
-    Function<SearchCriteria, Specification<AdminPermission>> converter = BaseSpecification::new;
-    Specification<AdminPermission> spec = builder.build(converter, search);
-    return adminPermissionRepository.findAll(spec, new PageRequest(pageIndex - 1, pageSize))
-        .getContent();
+    return adminPermissionRepository.filter(search, userId, pageIndex, pageSize);
   }
 }

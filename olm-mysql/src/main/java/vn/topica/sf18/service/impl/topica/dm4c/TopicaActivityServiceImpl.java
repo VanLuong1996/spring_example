@@ -29,16 +29,12 @@ public class TopicaActivityServiceImpl implements TopicaActivityService {
   }
 
   @Override
-  public List<TopicaActivity> findByIds(Long[] ids) {
-    return activityRepository.findByIds(ids);
+  public Iterable<TopicaActivity> findByIds(Iterable<Integer> ids) {
+    return activityRepository.findAllById(ids);
   }
 
   @Override
   public List<TopicaActivity> filter(String search, Long userId, int pageIndex, int pageSize) {
-    GenericSpecificationsBuilder<TopicaActivity> builder = new GenericSpecificationsBuilder<>();
-    Function<SearchCriteria, Specification<TopicaActivity>> converter = BaseSpecification::new;
-    Specification<TopicaActivity> spec = builder.build(converter, search);
-    return activityRepository.findAll(spec, new PageRequest(pageIndex - 1, pageSize))
-        .getContent();
+    return activityRepository.filter(search, userId, pageIndex, pageSize);
   }
 }

@@ -1,11 +1,9 @@
 package vn.topica.sf18.model.admin;
 
 import java.util.Set;
-import javax.persistence.Entity;
 import lombok.Data;
 
 @Data
-@Entity
 public class AdminRole {
 
   private Long id;

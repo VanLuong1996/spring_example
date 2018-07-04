@@ -1,4 +1,4 @@
-package vn.topica.sf18.constant;
+package vn.topica.sf18.excel.constant;
 
 public enum FileColumn {
     Date(3345),
