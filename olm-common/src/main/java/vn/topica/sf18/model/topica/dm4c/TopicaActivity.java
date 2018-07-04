@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class TopicaActivity extends BaseDm4cModel {
 
-  public TopicaActivity(String name){
+  public TopicaActivity(String name) {
     this.setName(name);
   }
 }

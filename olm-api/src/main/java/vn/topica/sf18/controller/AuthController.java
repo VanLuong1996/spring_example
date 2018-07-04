@@ -21,9 +21,9 @@ public class AuthController {
   @RequestMapping("/userRedirect")
   public void userRedirect(HttpServletResponse response, Principal principal) throws IOException {
     log.info("(user)principal:{}", principal.getName());
-    if(principal != null && !principal.getName().equals("")){
+    if (principal != null && !principal.getName().equals("")) {
       response.sendRedirect("/?loggedIn=true");
-    }else {
+    } else {
       response.sendRedirect("/?loggedIn=false");
     }
   }

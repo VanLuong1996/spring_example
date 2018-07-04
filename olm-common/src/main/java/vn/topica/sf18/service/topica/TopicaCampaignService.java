@@ -1,6 +1,7 @@
 package vn.topica.sf18.service.topica;
 
 import vn.topica.sf18.model.topica.TopicaCampaign;
+import vn.topica.sf18.service.BaseService;
 
 import java.util.List;
 import vn.topica.sf18.model.topica.TopicaImport;
@@ -9,7 +10,7 @@ import vn.topica.sf18.model.topica.dm4c.TopicaEstimator;
 import vn.topica.sf18.model.topica.dm4c.TopicaLegal;
 import vn.topica.sf18.model.topica.dm4c.TopicaProduct;
 
-public interface TopicaCampaignService {
+public interface TopicaCampaignService extends BaseService<TopicaCampaign> {
 
   TopicaCampaign save(TopicaCampaign baseObject);
 

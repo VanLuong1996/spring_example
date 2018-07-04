@@ -1,9 +1,8 @@
 package vn.topica.sf18.model.admin;
 
-import lombok.Data;
-
-import javax.persistence.Entity;
 import java.util.Set;
+import javax.persistence.Entity;
+import lombok.Data;
 
 /**
  * Created by ico on 10/9/17.
@@ -12,17 +11,17 @@ import java.util.Set;
 @Entity
 public class AdminPermission {
 
-    private Long id;
+  private Long id;
 
-    private String name;
-
-
-    private Set<AdminRole> adminRole;
-
-    private Set<AdminUser> adminUser;
+  private String name;
 
 
-    public AdminPermission(String name) {
-        this.name = name;
-    }
+  private Set<AdminRole> adminRole;
+
+  private Set<AdminUser> adminUser;
+
+
+  public AdminPermission(String name) {
+    this.name = name;
+  }
 }

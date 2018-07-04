@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>olm-server</artifactId>
-        <groupId>vn.topica.sf18</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>olm-server</artifactId>
+    <groupId>vn.topica.sf18</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>olm-worker</artifactId>
+  <artifactId>olm-worker</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.google.api-ads</groupId>
-            <artifactId>ads-lib</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.api-ads</groupId>
-            <artifactId>adwords-axis</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4.7</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>activation</artifactId>
-            <version>1.1.1</version>
-        </dependency>
+  <dependencies>
+    <dependency>
+      <groupId>com.google.api-ads</groupId>
+      <artifactId>ads-lib</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.api-ads</groupId>
+      <artifactId>adwords-axis</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4.7</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.1.1</version>
+    </dependency>
 
-        <dependency>
-            <groupId>com.facebook.business.sdk</groupId>
-            <artifactId>facebook-java-business-sdk</artifactId>
-            <version>3.0.3</version>
-        </dependency>
-    </dependencies>
+    <dependency>
+      <groupId>com.facebook.business.sdk</groupId>
+      <artifactId>facebook-java-business-sdk</artifactId>
+      <version>3.0.3</version>
+    </dependency>
+  </dependencies>
 </project>

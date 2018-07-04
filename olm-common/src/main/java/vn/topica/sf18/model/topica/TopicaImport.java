@@ -8,13 +8,13 @@ import vn.topica.sf18.model.BaseModel;
 @Data
 public class TopicaImport extends BaseModel {
 
-    private Long id;
+  private Long id;
 
-    private String path;
+  private String path;
 
-    private String url;
+  private String url;
 
-    private FileImportStatus status;
+  private FileImportStatus status;
 
-    private FileImportType type;
+  private FileImportType type;
 }

@@ -9,23 +9,23 @@ import vn.topica.sf18.model.topica.dm4c.TopicaProduct;
 @Data
 public class TopicaCampaign {
 
-    private Long id;
+  private Long id;
 
-    private String campaign;
+  private String campaign;
 
-    private long campaignId;
+  private long campaignId;
 
-    private String account;
+  private String account;
 
-    private String accountId;
+  private String accountId;
 
-    private String source;
+  private String source;
 
-    private TopicaProduct product;
+  private TopicaProduct product;
 
-    private TopicaEstimator estimator;
+  private TopicaEstimator estimator;
 
-    private TopicaLegal legal;
+  private TopicaLegal legal;
 
-    private TopicaActivity activity;
+  private TopicaActivity activity;
 }

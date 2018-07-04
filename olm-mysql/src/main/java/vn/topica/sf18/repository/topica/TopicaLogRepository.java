@@ -1,13 +1,8 @@
 package vn.topica.sf18.repository.topica;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import vn.topica.sf18.model.topica.TopicaLog;
+import vn.topica.sf18.repository.BaseRepository;
 
-public interface TopicaLogRepository extends PagingAndSortingRepository<TopicaLog, Long>,
-        JpaSpecificationExecutor<TopicaLog> {
+public interface TopicaLogRepository extends BaseRepository<TopicaLog, Long> {
 
-    Page<TopicaLog> findAll(Pageable pageable);
 }

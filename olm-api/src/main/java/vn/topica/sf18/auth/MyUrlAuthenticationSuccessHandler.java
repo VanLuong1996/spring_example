@@ -26,15 +26,18 @@ public class MyUrlAuthenticationSuccessHandler implements AuthenticationSuccessH
 
   // API
   @Override
-  public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication) throws IOException {
+  public void onAuthenticationSuccess(final HttpServletRequest request,
+      final HttpServletResponse response, final Authentication authentication) throws IOException {
     handle(request, response, authentication);
   }
 
   // IMPL
-  protected void handle(final HttpServletRequest request, final HttpServletResponse response, final Authentication authentication) throws IOException {
+  protected void handle(final HttpServletRequest request, final HttpServletResponse response,
+      final Authentication authentication) throws IOException {
     String domain = environment.getProperty("app.domain");
-    if(domain == null){
-      domain = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+    if (domain == null) {
+      domain =
+          request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
     }
     log.info("(handle)doamin: {}", domain);
     final String targetUrl = domain + determineTargetUrl(authentication);
@@ -72,11 +75,11 @@ public class MyUrlAuthenticationSuccessHandler implements AuthenticationSuccessH
     }
   }
 
-  public void setRedirectStrategy(final RedirectStrategy redirectStrategy) {
-    this.redirectStrategy = redirectStrategy;
-  }
-
   protected RedirectStrategy getRedirectStrategy() {
     return redirectStrategy;
+  }
+
+  public void setRedirectStrategy(final RedirectStrategy redirectStrategy) {
+    this.redirectStrategy = redirectStrategy;
   }
 }

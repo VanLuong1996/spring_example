@@ -1,17 +1,16 @@
 package vn.topica.sf18.model;
 
-import lombok.Data;
-
 import java.sql.Timestamp;
+import lombok.Data;
 
 @Data
 public class BaseModel {
 
-    protected Timestamp createdDate;
+  protected Timestamp createdDate;
 
-    protected Timestamp lastModifiedDate;
+  protected Timestamp lastModifiedDate;
 
-    protected String createdBy;
+  protected String createdBy;
 
-    protected String lastModifiedBy;
+  protected String lastModifiedBy;
 }

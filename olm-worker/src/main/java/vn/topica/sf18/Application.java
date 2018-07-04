@@ -11,12 +11,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Slf4j
 public class Application implements CommandLineRunner {
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class);
+  }
 
-    @Override
-    public void run(String... args) {
-        log.info("Run application");
-    }
+  @Override
+  public void run(String... args) {
+    log.info("Run application");
+  }
 }

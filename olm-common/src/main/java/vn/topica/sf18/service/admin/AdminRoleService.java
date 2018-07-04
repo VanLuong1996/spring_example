@@ -1,20 +1,12 @@
 package vn.topica.sf18.service.admin;
 
-import vn.topica.sf18.model.admin.AdminRole;
-
 import java.util.List;
+import vn.topica.sf18.model.admin.AdminRole;
+import vn.topica.sf18.service.BaseService;
 
-public interface AdminRoleService {
+public interface AdminRoleService extends BaseService<AdminRole> {
 
-    AdminRole save(AdminRole baseObject);
+  AdminRole findByName(String name);
 
-    //region admin-on-rest
-    List<AdminRole> findByIds(Long[] ids);
-
-    List<AdminRole> filter(String search, Long userId, int pageIndex, int pageSize);
-
-
-    AdminRole findByName(String name);
-
-    List<AdminRole> findRolesByUsername(String username);
+  List<AdminRole> findRolesByUsername(String username);
 }

@@ -3,10 +3,9 @@ package vn.topica.sf18.service.topica;
 import vn.topica.sf18.constant.FileImportStatus;
 import vn.topica.sf18.constant.FileImportType;
 import vn.topica.sf18.model.topica.TopicaImport;
+import vn.topica.sf18.service.BaseService;
 
-import java.util.List;
-
-public interface TopicaImportService {
+public interface TopicaImportService extends BaseService<TopicaImport> {
 
   TopicaImport save(TopicaImport baseObject);
 
