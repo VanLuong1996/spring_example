@@ -1,14 +1,20 @@
 package vn.topica.sf18;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import vn.topica.sf18.config.EnableMySQL;
 
-@EnableMySQL
+@Slf4j
 @SpringBootApplication
-public class Application {
+public class Application implements CommandLineRunner {
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     SpringApplication.run(Application.class);
+  }
+
+  @Override
+  public void run(String... strings) {
+    log.info("Start application");
   }
 }

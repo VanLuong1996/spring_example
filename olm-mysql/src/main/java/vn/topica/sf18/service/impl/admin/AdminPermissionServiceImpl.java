@@ -31,11 +31,13 @@ public class AdminPermissionServiceImpl implements AdminPermissionService {
 
   @Override
   public Iterable<AdminPermission> findByIds(Iterable<Long> ids) {
-    return adminPermissionRepository.findAllById(ids);
+    return null;
+//    return adminPermissionRepository.findAllById(ids);
   }
 
   @Override
   public List<AdminPermission> filter(String search, Long userId, int pageIndex, int pageSize) {
-    return adminPermissionRepository.filter(search, userId, pageIndex, pageSize);
+    return null;
+//    return adminPermissionRepository.filter(search, userId, pageIndex, pageSize);
   }
 }

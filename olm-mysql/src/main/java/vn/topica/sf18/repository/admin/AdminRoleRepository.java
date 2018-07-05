@@ -1,15 +1,17 @@
 package vn.topica.sf18.repository.admin;
 
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import vn.topica.sf18.model.admin.AdminRole;
-import vn.topica.sf18.repository.MyRepository;
 
 /**
  *
  */
-public interface AdminRoleRepository extends MyRepository<AdminRole, Long> {
+public interface AdminRoleRepository extends PagingAndSortingRepository<AdminRole, Long>,
+    JpaSpecificationExecutor<AdminRole> {
 
   AdminRole findByName(String name);
 

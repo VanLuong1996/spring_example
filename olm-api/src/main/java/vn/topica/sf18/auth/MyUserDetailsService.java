@@ -16,7 +16,7 @@ import vn.topica.sf18.model.admin.AdminUser;
 import vn.topica.sf18.service.admin.AdminRoleService;
 import vn.topica.sf18.service.admin.AdminUserService;
 
-//@Component
+@Component
 @Slf4j
 public class MyUserDetailsService implements UserDetailsService {
 

@@ -33,11 +33,13 @@ public class AdminUserServiceImpl implements AdminUserService {
 
   @Override
   public Iterable<AdminUser> findByIds(Iterable<Long> ids) {
-    return adminUserRepository.findAllById(ids);
+    return null;
+//    return adminUserRepository.findAllById(ids);
   }
 
   @Override
   public List<AdminUser> filter(String search, Long userId, int pageIndex, int pageSize) {
-    return adminUserRepository.filter(search, userId, pageIndex, pageSize);
+    return null;
+//    return adminUserRepository.filter(search, userId, pageIndex, pageSize);
   }
 }

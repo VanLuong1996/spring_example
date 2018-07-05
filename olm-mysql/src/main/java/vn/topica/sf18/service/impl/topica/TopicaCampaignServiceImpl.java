@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import vn.topica.sf18.model.topica.TopicaCampaign;
+import vn.topica.sf18.model.topica.dm4c.TopicaActivity;
+import vn.topica.sf18.model.topica.dm4c.TopicaEstimator;
+import vn.topica.sf18.model.topica.dm4c.TopicaLegal;
+import vn.topica.sf18.model.topica.dm4c.TopicaProduct;
 import vn.topica.sf18.service.topica.TopicaCampaignService;
 
 @AllArgsConstructor
@@ -24,6 +28,27 @@ public class TopicaCampaignServiceImpl implements TopicaCampaignService {
 
   @Override
   public List<TopicaCampaign> filter(String search, Long userId, int pageIndex, int pageSize) {
+    return null;
+  }
+
+  @Override
+  public TopicaCampaign getCampaignInfo(Long campaignId) {
+    return null;
+  }
+
+  @Override
+  public List<TopicaCampaign> importFile(Long fileId) {
+    return null;
+  }
+
+  @Override
+  public List<TopicaCampaign> updateImportedFile(Long fileId) {
+    return null;
+  }
+
+  @Override
+  public TopicaCampaign mappingCampaignToStakeholders(Long campaignId, TopicaProduct topicaProduct,
+      TopicaActivity topicaActivity, TopicaLegal legal, TopicaEstimator topicaEstimator) {
     return null;
   }
 }

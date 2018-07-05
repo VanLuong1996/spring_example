@@ -30,11 +30,13 @@ public class TopicaActivityServiceImpl implements TopicaActivityService {
 
   @Override
   public Iterable<TopicaActivity> findByIds(Iterable<Integer> ids) {
-    return activityRepository.findAllById(ids);
+    return null;
+//    return activityRepository.findAllById(ids);
   }
 
   @Override
   public List<TopicaActivity> filter(String search, Long userId, int pageIndex, int pageSize) {
-    return activityRepository.filter(search, userId, pageIndex, pageSize);
+    return activityRepository.findAll(new PageRequest(pageIndex, pageSize)).getContent();
+//    return activityRepository.filter(search, userId, pageIndex, pageSize);
   }
 }

@@ -9,7 +9,7 @@ import vn.topica.sf18.model.topica.dm4c.TopicaEstimator;
 import vn.topica.sf18.model.topica.dm4c.TopicaLegal;
 import vn.topica.sf18.model.topica.dm4c.TopicaProduct;
 
-public interface TopicaCampaignService extends BaseService<TopicaCampaign> {
+public interface TopicaCampaignService extends BaseService<TopicaCampaign, Long> {
   TopicaCampaign getCampaignInfo(Long campaignId);
 
   //import file

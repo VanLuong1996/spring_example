@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import vn.topica.sf18.repository.MyRepository;
 import vn.topica.sf18.specification.BaseSpecification;
 
-@Repository
+//@Repository
 public class MyRepositoryImpl<T, ID extends Serializable>
     extends SimpleJpaRepository<T, ID> implements MyRepository<T, ID> {
 
@@ -35,6 +35,6 @@ public class MyRepositoryImpl<T, ID extends Serializable>
     GenericSpecificationsBuilder<T> builder = new GenericSpecificationsBuilder<>();
     Function<SearchCriteria, Specification<T>> converter = BaseSpecification::new;
     Specification<T> spec = builder.build(converter, search);
-    return this.findAll(spec, PageRequest.of(pageIndex - 1, pageSize)).getContent();
+    return this.findAll(spec, new PageRequest(pageIndex - 1, pageSize)).getContent();
   }
 }

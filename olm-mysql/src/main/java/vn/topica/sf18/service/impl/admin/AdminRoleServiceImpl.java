@@ -38,11 +38,13 @@ public class AdminRoleServiceImpl implements AdminRoleService {
 
   @Override
   public Iterable<AdminRole> findByIds(Iterable<Long> ids) {
-    return adminRoleRepository.findAllById(ids);
+    return null;
+//    return adminRoleRepository.findAllById(ids);
   }
 
   @Override
   public List<AdminRole> filter(String search, Long userId, int pageIndex, int pageSize) {
-    return adminRoleRepository.filter(search, userId, pageIndex, pageSize);
+    return null;
+//    return adminRoleRepository.filter(search, userId, pageIndex, pageSize);
   }
 }

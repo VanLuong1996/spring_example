@@ -1,8 +1,11 @@
 package vn.topica.sf18.repository.topica.dm4c;
 
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import vn.topica.sf18.model.topica.dm4c.TopicaEstimator;
-import vn.topica.sf18.repository.MyRepository;
 
-public interface TopicaEstimatorRepository extends MyRepository<TopicaEstimator, Integer> {
+public interface TopicaEstimatorRepository extends
+    PagingAndSortingRepository<TopicaEstimator, Long>,
+    JpaSpecificationExecutor<TopicaEstimator> {
 
 }
