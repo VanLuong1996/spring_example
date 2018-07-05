@@ -13,6 +13,15 @@
 
   <dependencies>
     <dependency>
+      <groupId>vn.topica.sf18</groupId>
+      <artifactId>olm-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>vn.topica.sf18</groupId>
+      <artifactId>olm-mysql</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>com.google.api-ads</groupId>
       <artifactId>ads-lib</artifactId>
       <version>RELEASE</version>

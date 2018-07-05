@@ -47,7 +47,7 @@ public class SyncFacebookMarketing {
         for (AdAccount adAccount : accounts) {
           log.info("adAccount {}", adAccount);
 
-//                    exploreAccount(adAccount);
+//          exploreAccount(adAccount);
         }
 
         accounts = accounts.nextPage();

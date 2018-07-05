@@ -36,5 +36,7 @@ nbdist/
 **/logs/**
 **/target/**
 
+*.bak
+*.log
 **/ads.properties
 **/application.properties

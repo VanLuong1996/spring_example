@@ -22,22 +22,22 @@ public class TopicaCampaignServiceImpl implements TopicaCampaignService {
   }
 
   @Override
+  public TopicaCampaign findById(Long id) {
+    return null;
+  }
+
+  @Override
+  public List<TopicaCampaign> findCampaignByImportId(Long fileId) {
+    return null;
+  }
+
+  @Override
   public Iterable<TopicaCampaign> findByIds(Iterable<Long> ids) {
     return null;
   }
 
   @Override
   public List<TopicaCampaign> filter(String search, Long userId, int pageIndex, int pageSize) {
-    return null;
-  }
-
-  @Override
-  public TopicaCampaign getCampaignInfo(Long campaignId) {
-    return null;
-  }
-
-  @Override
-  public List<TopicaCampaign> importFile(Long fileId) {
     return null;
   }
 
@@ -50,5 +50,10 @@ public class TopicaCampaignServiceImpl implements TopicaCampaignService {
   public TopicaCampaign mappingCampaignToStakeholders(Long campaignId, TopicaProduct topicaProduct,
       TopicaActivity topicaActivity, TopicaLegal legal, TopicaEstimator topicaEstimator) {
     return null;
+  }
+
+  @Override
+  public void importCampaign(Long importId) {
+
   }
 }

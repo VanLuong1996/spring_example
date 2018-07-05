@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import vn.topica.sf18.constant.FileImportType;
+import vn.topica.sf18.model.topica.TopicaImport;
+import vn.topica.sf18.queue.TopicaImportQueue;
 import vn.topica.sf18.service.google.adwords.AccountService;
 import vn.topica.sf18.service.google.adwords.AuthService;
 import vn.topica.sf18.service.google.adwords.ReportService;
@@ -29,6 +32,9 @@ public class SyncGoogleAdWords {
 
   @Autowired
   private ReportService reportService;
+
+  @Autowired
+  private TopicaImportQueue topicaImportQueue;
 
   @Scheduled(cron = "${app.scheduler.sync.googleAdWords}")
   public void syncData() {
@@ -50,8 +56,12 @@ public class SyncGoogleAdWords {
 
         AdWordsSession adWordsAccountSession = authService
             .getAdWordsSession(Long.toString(account.getCustomerId()));
-        reportService.getReport(reportFolder + account.getCustomerId() + ".csv", adWordsService,
+        String filePath = reportFolder + account.getCustomerId() + ".csv";
+        reportService.getReport(filePath, adWordsService,
             adWordsAccountSession);
+
+        //Add file to IMPORT QUEUE
+        topicaImportQueue.add(TopicaImport.ofGAC(filePath));
       }
     } catch (Exception ex) {
       log.error(ExceptionUtils.getFullStackTrace(ex));
