@@ -24,7 +24,7 @@ public class TopicaActivityController {
     List<TopicaActivity> activities = activityService.filter("", null, 0, 1000);
     log.info("size {}", activities.size());
     return activities;
-  }///
+  }
 
   @PostMapping("/activities")
   public void insert(String name) {
