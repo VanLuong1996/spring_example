@@ -13,12 +13,18 @@ import com.google.api.ads.adwords.lib.utils.v201806.ReportDownloaderInterface;
 import com.google.api.ads.adwords.lib.utils.v201806.ReportQuery;
 import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import vn.topica.sf18.model.topica.TopicaImport;
+import vn.topica.sf18.queue.TopicaImportQueue;
 
 @Service
 @Slf4j
 public class ReportService {
+
+  @Autowired
+  private TopicaImportQueue topicaImportQueue;
 
   @Async
   public void getReport(String reportFile, AdWordsServicesInterface adWordsService,
@@ -67,6 +73,8 @@ public class ReportService {
         reportDownloader.downloadReport(query.toString(), DownloadFormat.CSV);
     response.saveToFile(reportFile);
 
+    //Add file to IMPORT QUEUE
+    topicaImportQueue.add(TopicaImport.ofGAC(reportFile));
     log.info("Report successfully downloaded to: {}", reportFile);
   }
 }

@@ -33,9 +33,6 @@ public class SyncGoogleAdWords {
   @Autowired
   private ReportService reportService;
 
-  @Autowired
-  private TopicaImportQueue topicaImportQueue;
-
   @Scheduled(cron = "${app.scheduler.sync.googleAdWords}")
   public void syncData() {
     try {
@@ -57,11 +54,7 @@ public class SyncGoogleAdWords {
         AdWordsSession adWordsAccountSession = authService
             .getAdWordsSession(Long.toString(account.getCustomerId()));
         String filePath = reportFolder + account.getCustomerId() + ".csv";
-        reportService.getReport(filePath, adWordsService,
-            adWordsAccountSession);
-
-        //Add file to IMPORT QUEUE
-        topicaImportQueue.add(TopicaImport.ofGAC(filePath));
+        reportService.getReport(filePath, adWordsService, adWordsAccountSession);
       }
     } catch (Exception ex) {
       log.error(ExceptionUtils.getFullStackTrace(ex));

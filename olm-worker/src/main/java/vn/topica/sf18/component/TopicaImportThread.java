@@ -1,4 +1,4 @@
-package vn.topica.sf18.thread;
+package vn.topica.sf18.component;
 
 import vn.topica.sf18.model.topica.TopicaImport;
 import vn.topica.sf18.service.topica.TopicaImportService;

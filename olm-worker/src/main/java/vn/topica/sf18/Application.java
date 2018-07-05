@@ -7,9 +7,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import vn.topica.sf18.component.TopicaImportComponent;
+import vn.topica.sf18.model.topica.TopicaImport;
 import vn.topica.sf18.queue.TopicaImportQueue;
-import vn.topica.sf18.service.topica.TopicaImportService;
-import vn.topica.sf18.thread.TopicaImportRunnable;
 
 @SpringBootApplication
 @EnableScheduling
@@ -17,10 +17,10 @@ import vn.topica.sf18.thread.TopicaImportRunnable;
 public class Application implements CommandLineRunner {
 
   @Autowired
-  private TopicaImportQueue topicaImportQueue;
+  private TopicaImportComponent topicaImportComponent;
 
   @Autowired
-  private TopicaImportService topicaImportService;
+  private TopicaImportQueue topicaImportQueue;
 
   public static void main(String[] args) {
     SpringApplication.run(Application.class);
@@ -29,13 +29,15 @@ public class Application implements CommandLineRunner {
   @Override
   public void run(String... args) {
     log.info("Run application");
+    init();
+  }
 
+  private void init(){
     try{
       while(true){
         if(!topicaImportQueue.isEmpty()){
-          TopicaImportRunnable topicaImportRunnable = new TopicaImportRunnable(topicaImportQueue.poll(), topicaImportService);
-          Thread thread = new Thread(topicaImportRunnable, "Topica Import");
-          thread.start();
+          TopicaImport topicaImport = topicaImportQueue.poll();
+          topicaImportComponent.save(topicaImport);
         }else {
           log.debug("Size {}", topicaImportQueue.getSize());
           Thread.sleep(2000L);

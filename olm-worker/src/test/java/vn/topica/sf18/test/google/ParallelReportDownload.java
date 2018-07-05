@@ -184,7 +184,7 @@ public class ParallelReportDownload {
    * @throws IOException if the report's contents could not be read from the response.
    * @throws ValidationException if creation of an ImmutableAdWordsSession for a customer failed due
    * to validation issues.
-   * @throws InterruptedException if the thread was interrupted while waiting for all report
+   * @throws InterruptedException if the component was interrupted while waiting for all report
    * downloads to complete.
    */
   public static void runExample(
@@ -227,7 +227,7 @@ public class ParallelReportDownload {
             .includeZeroImpressions(false)
             .build();
 
-    // Create a thread pool for submitting report requests.
+    // Create a component pool for submitting report requests.
     ExecutorService threadPool = Executors.newFixedThreadPool(numberOfThreads);
 
     // Customize this builder if you want to change the backoff policy on retryable report
@@ -267,10 +267,10 @@ public class ParallelReportDownload {
       reportDownloadFutureTasks.add(reportDownloadFutureTask);
     }
 
-    // All callables have been submitted. Shut down the thread pool.
+    // All callables have been submitted. Shut down the component pool.
     threadPool.shutdown();
 
-    // Wait for the thread pool to terminate.
+    // Wait for the component pool to terminate.
     threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
 
     System.out.println();
@@ -392,7 +392,7 @@ public class ParallelReportDownload {
      * from the reporting service.
      * @throws ReportException if the report request failed due to a transport layer error.
      * @throws IOException if the report's contents could not be written to {@code reportFile}.
-     * @throws InterruptedException if the thread was interrupted while waiting between retries.
+     * @throws InterruptedException if the component was interrupted while waiting between retries.
      */
     @Override
     public File call()

@@ -1,4 +1,4 @@
-package vn.topica.sf18.thread;
+package vn.topica.sf18.component;
 
 import lombok.extern.slf4j.Slf4j;
 import vn.topica.sf18.model.topica.TopicaImport;
@@ -18,7 +18,7 @@ public class TopicaImportRunnable implements Runnable {
 
   @Override
   public void run() {
-    log.info("TopicaImport {}", topicaImport);
+    log.debug("TopicaImport {}", topicaImport);
     service.save(topicaImport);
   }
 }
