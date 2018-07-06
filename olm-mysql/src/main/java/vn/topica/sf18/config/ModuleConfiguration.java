@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class ModuleConfiguration {
 
   @PostConstruct
-  public void init(){
+  public void init() {
     log.info("init configuration success");
   }
 }

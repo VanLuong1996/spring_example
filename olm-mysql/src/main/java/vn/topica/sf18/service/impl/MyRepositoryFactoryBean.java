@@ -15,11 +15,6 @@ import vn.topica.sf18.repository.MyRepository;
 public class MyRepositoryFactoryBean<R extends JpaRepository<T, I>, T, I extends Serializable>
     extends JpaRepositoryFactoryBean<R, T, I> {
 
-  @PostConstruct
-  public void init(){
-    log.info("init configuration success");
-  }
-
   /**
    * Creates a new {@link JpaRepositoryFactoryBean} for the given repository interface.
    *
@@ -27,6 +22,11 @@ public class MyRepositoryFactoryBean<R extends JpaRepository<T, I>, T, I extends
    */
   public MyRepositoryFactoryBean(Class<? extends R> repositoryInterface) {
     super(repositoryInterface);
+  }
+
+  @PostConstruct
+  public void init() {
+    log.info("init configuration success");
   }
 
   protected RepositoryFactorySupport createRepositoryFactory(EntityManager entityManager) {

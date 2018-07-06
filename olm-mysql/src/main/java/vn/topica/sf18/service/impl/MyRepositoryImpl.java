@@ -10,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-import org.springframework.stereotype.Repository;
 import vn.topica.sf18.repository.MyRepository;
 import vn.topica.sf18.specification.BaseSpecification;
 
@@ -22,7 +21,8 @@ public class MyRepositoryImpl<T, ID extends Serializable>
   private final EntityManager entityManager;
 
   // There are two constructors to choose from, either can be used.
-  public MyRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
+  public MyRepositoryImpl(JpaEntityInformation<T, ?> entityInformation,
+      EntityManager entityManager) {
     super(entityInformation, entityManager);
 
     // This is the recommended method for accessing inherited class dependencies.
