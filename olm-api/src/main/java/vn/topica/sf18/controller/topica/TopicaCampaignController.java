@@ -7,15 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import vn.topica.sf18.model.topica.TopicaCampaign;
+import vn.topica.sf18.service.topica.TopicaCampaignService;
+import vn.topica.sf18.service.topica.TopicaLogService;
 
 @RestController
 @RequestMapping("/api/topica")
 @Slf4j
 public class TopicaCampaignController {
+
   @Autowired
   private TopicaCampaignService topicaCampaignService;
 
@@ -40,7 +43,7 @@ public class TopicaCampaignController {
   }
 
   @PutMapping("/campaign")
-  public void mappingCampaign( @RequestBody List<TopicaCampaign> campaigns) {
+  public void mappingCampaign(@RequestBody List<TopicaCampaign> campaigns) {
     log.info("(mapping campaign) {}");
 
     //->get userId
@@ -51,8 +54,8 @@ public class TopicaCampaignController {
   }
 
   @GetMapping("/campaign")
-  public void report(@RequestParam long fromDate, @RequestParam long toDate){
-    log.info("(insert) {}", name);
+  public void report(@RequestParam long fromDate, @RequestParam long toDate) {
+    log.info("(report ) {}", fromDate, toDate);
 
     topicaCampaignService.report(fromDate, toDate);
   }

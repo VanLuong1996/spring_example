@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vn.topica.sf18.model.topica.TopicaLog;
+import vn.topica.sf18.service.topica.TopicaLogService;
 
 @RestController
 @RequestMapping("/api/topica")

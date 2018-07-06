@@ -9,14 +9,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vn.topica.sf18.model.topica.TopicaImport;
+import vn.topica.sf18.service.topica.TopicaCampaignService;
+import vn.topica.sf18.service.topica.TopicaImportService;
+import vn.topica.sf18.service.topica.TopicaLogService;
 
 @RestController
 @RequestMapping("/api/topica")
 @Slf4j
 public class TopicaImportController {
+
   @Autowired
   private TopicaImportService topicaImportService;
 
@@ -36,7 +40,7 @@ public class TopicaImportController {
   }
 
   @GetMapping("/import/{Id}")
-  public TopicaImport getById(@PathVariable("Id") long id){
+  public TopicaImport getById(@PathVariable("Id") long id) {
     log.info("(get import info)", id);
 
     TopicaImport topicaImport = topicaImportService.findById(id);
@@ -44,10 +48,11 @@ public class TopicaImportController {
   }
 
   @PostMapping("/import")
-  public TopicaImport importFile(@Valid @RequestBody String path, @Valid @RequestBody FileImportType type){
+  public TopicaImport importFile(@Valid @RequestBody String path,
+      @Valid @RequestBody FileImportType type) {
     log.info("(import new file) {}", path, type);
 
-    TopicaImport import = topicaImportService.save(path, type);
+    TopicaImport import =topicaImportService.save(path, type);
     topicaCampaignService.extract(import.getId());
     //->get userId
     //add log //action = MARKETER_IMPORT_FILE
@@ -58,7 +63,7 @@ public class TopicaImportController {
   }
 
   @PutMapping("/import/{Id}")
-  public void changeImportedFile(@PathVariable("Id") long id, @Valid @RequestBody String path){
+  public void changeImportedFile(@PathVariable("Id") long id, @Valid @RequestBody String path) {
     log.info("(update file) {}", id, path);
 
     topicaImportService.update(id, path);
@@ -70,7 +75,7 @@ public class TopicaImportController {
   }
 
   @PutMapping("/import")
-  public void confirmFile(@RequestBody List<long> ids){
+  public void confirmFile(@RequestBody List<long> ids) {
     log.info("(confirm files) {}", listIds);
 
     topicaImportService.confirm(ids);
