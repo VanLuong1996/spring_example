@@ -5,6 +5,7 @@ import vn.topica.sf18.model.topica.TopicaCampaignData;
 import vn.topica.sf18.service.BaseService;
 
 public interface TopicaCampaignDataService extends BaseService<TopicaCampaignData, Long> {
+
   TopicaCampaignData getCampaignDataInfo(Long campaignId);
 
   //import file

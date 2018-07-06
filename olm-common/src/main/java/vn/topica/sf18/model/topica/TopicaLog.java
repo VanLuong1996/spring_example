@@ -6,10 +6,8 @@ import vn.topica.sf18.constant.UserAction;
 @Data
 public class TopicaLog {
 
-  private Long id;
-
   protected String createdBy;
-
+  private Long id;
   private UserAction action;
 
   private String description;

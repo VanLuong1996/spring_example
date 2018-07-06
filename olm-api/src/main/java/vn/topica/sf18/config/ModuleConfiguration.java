@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class ModuleConfiguration {
 
   @PostConstruct
-  public void init(){
+  public void init() {
     log.info("init configuration success");
   }
 }
