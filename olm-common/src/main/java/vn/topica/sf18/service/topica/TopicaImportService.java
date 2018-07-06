@@ -8,18 +8,16 @@ import vn.topica.sf18.service.BaseService;
 
 public interface TopicaImportService extends BaseService<TopicaImport, Long> {
 
-  TopicaImport getImportFileInfo(Long fileId);
+  //get topicaimport by id
+  TopicaImport findById(long id);
 
   //import file
-  TopicaImport importFile(String path, String url, FileImportType fileImportType);
+  TopicaImport save(String path, FileImportType type);
 
-  //xem trang thai cua viec import
-  FileImportStatus getFileImportStatus(Long fileId);
+  //update file
+  void update(long id, String path);
 
-  //update lai du lieu import
-  TopicaImport updateImportedFile(Long fileId, String path, String url);
-
-  //manager xac nhan (confirm) thay doi du lieu
-  TopicaImport confirmChangedData(Long id, Long managerId);
+  //confirm file
+  void confirm(List<Long> ids);
 
 }

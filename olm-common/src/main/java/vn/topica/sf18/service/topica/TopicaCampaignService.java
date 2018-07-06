@@ -11,20 +11,15 @@ import vn.topica.sf18.model.topica.dm4c.TopicaProduct;
 
 public interface TopicaCampaignService extends BaseService<TopicaCampaign, Long> {
 
-  TopicaCampaign save(TopicaCampaign campaign);
+  //get campaign by campaign id
+  TopicaCampaign findById(long id);
 
-  TopicaCampaign findById(Long id);
+  //mapping campaign
+  void update(List<TopicaCampaign> campaigns);
 
-  //import file
-  List<TopicaCampaign> findCampaignByImportId(Long fileId);
+  //save campaign from file
+  void extract(long fileId);
 
-  //update lai du lieu import
-  List<TopicaCampaign> updateImportedFile(Long fileId);
+  List<TopicaCampaign> report(long fromDate, long toDate);
 
-  //map campaignId & "hoat dong", "san pham", "chu du toan", "phap nhan"
-  TopicaCampaign mappingCampaignToStakeholders(Long campaignId,
-      TopicaProduct topicaProduct, TopicaActivity topicaActivity, TopicaLegal legal,
-      TopicaEstimator topicaEstimator);
-
-  void importCampaign(Long importId);
 }

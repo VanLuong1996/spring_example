@@ -44,6 +44,22 @@
       <groupId>org.springframework.security.oauth</groupId>
       <artifactId>spring-security-oauth2</artifactId>
     </dependency>
+    <dependency>
+      <groupId>vn.topica.sf18</groupId>
+      <artifactId>olm-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>vn.topica.sf18</groupId>
+      <artifactId>olm-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>vn.topica.sf18</groupId>
+      <artifactId>olm-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>vn.topica.sf18</groupId>
+      <artifactId>olm-common</artifactId>
+    </dependency>
   </dependencies>
 
   <repositories>
