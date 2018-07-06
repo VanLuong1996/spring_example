@@ -18,7 +18,7 @@ public class TopicaImport extends BaseModel {
 
   private FileImportType type;
 
-  public static TopicaImport ofGAC(String path){
+  public static TopicaImport ofGAC(String path) {
     TopicaImport topicaImport = new TopicaImport();
     topicaImport.setPath(path);
     topicaImport.setStatus(FileImportStatus.UPLOADED);
@@ -27,7 +27,7 @@ public class TopicaImport extends BaseModel {
     return topicaImport;
   }
 
-  public static TopicaImport ofGS(String url){
+  public static TopicaImport ofGS(String url) {
     TopicaImport topicaImport = new TopicaImport();
     topicaImport.setUrl(url);
     topicaImport.setStatus(FileImportStatus.UPLOADED);

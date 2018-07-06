@@ -10,6 +10,8 @@ public interface TopicaCampaignDataService extends BaseService<TopicaCampaignDat
   //get campaign by campaign id
   TopicaCampaign findById(long id);
 
+  TopicaCampaignData getCampaignDataInfo(Long campaignId);
+
   //mapping campaign
   void update(List<TopicaCampaign> campaigns);
 

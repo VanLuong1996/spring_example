@@ -24,138 +24,139 @@ import vn.topica.sf18.excel.model.FileColumnData;
 import vn.topica.sf18.excel.service.ImportFile;
 
 public class ImportSpreadsheetFile implements ImportFile {
-    private static final String APPLICATION_NAME = "aa";
 
-    private static final java.io.File DATA_STORE_DIR =
-            new java.io.File(
-                    System.getProperty("user.home"),
-                    ".credentials/client_secret_35546725757-ops8vreuafgd7o6f57g5blgm02fuoacu.apps.googleusercontent.com");
+  private static final String APPLICATION_NAME = "aa";
 
-    private static FileDataStoreFactory DATA_STORE_FACTORY;
+  private static final java.io.File DATA_STORE_DIR =
+      new java.io.File(
+          System.getProperty("user.home"),
+          ".credentials/client_secret_35546725757-ops8vreuafgd7o6f57g5blgm02fuoacu.apps.googleusercontent.com");
+  private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+  private static final List<String> SCOPES = Arrays.asList(SheetsScopes.SPREADSHEETS_READONLY);
+  private static FileDataStoreFactory DATA_STORE_FACTORY;
+  private static HttpTransport HTTP_TRANSPORT;
 
-    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+  static {
+    try {
+      HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+      DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
+    } catch (Throwable t) {
+      t.printStackTrace();
+      System.exit(1);
+    }
+  }
 
-    private static HttpTransport HTTP_TRANSPORT;
+  private List<Object> headers;
+  private Iterator<List<Object>> rowIterator;
 
-    private static final List<String> SCOPES = Arrays.asList(SheetsScopes.SPREADSHEETS_READONLY);
+  public static Credential authorize() throws IOException {
+    InputStream in = ImportSpreadsheetFile.class.getResourceAsStream("/client_id.json");
+    GoogleClientSecrets clientSecrets = GoogleClientSecrets
+        .load(JSON_FACTORY, new InputStreamReader(in));
 
-    static {
-        try {
-            HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-            DATA_STORE_FACTORY = new FileDataStoreFactory(DATA_STORE_DIR);
-        } catch (Throwable t) {
-            t.printStackTrace();
-            System.exit(1);
-        }
+    GoogleAuthorizationCodeFlow flow =
+        new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
+            .setDataStoreFactory(DATA_STORE_FACTORY)
+            .setAccessType("offline")
+            .build();
+    Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver())
+        .authorize("user");
+    System.out.println("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
+    return credential;
+  }
+
+  public static Sheets getSheetsService() throws IOException {
+    Credential credential = authorize();
+    return new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
+        .setApplicationName(APPLICATION_NAME).build();
+  }
+
+  public String getSpreadsheetIDFromURL(String fileURL) {
+    String fileID = null;
+
+    int indexOfDSlash = fileURL.indexOf("/d/");
+    int indexOfEditSlash = fileURL.indexOf("/edit");
+
+    int lengthOfURL = fileURL.length();
+
+    if (indexOfEditSlash == -1) {
+      fileID = fileURL.substring(indexOfDSlash + 3);
+    } else {
+      fileID = fileURL.substring(indexOfDSlash + 3, indexOfEditSlash);
     }
 
-    public static Credential authorize() throws IOException {
-        InputStream in = ImportSpreadsheetFile.class.getResourceAsStream("/client_id.json");
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+    return fileID;
+  }
 
-        GoogleAuthorizationCodeFlow flow =
-                new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
-                        .setDataStoreFactory(DATA_STORE_FACTORY)
-                        .setAccessType("offline")
-                        .build();
-        Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
-        System.out.println("Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
-        return credential;
+  public void importFileData(String fileURL) {
+    Sheets service = null;
+    try {
+      service = getSheetsService();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
 
-    public static Sheets getSheetsService() throws IOException {
-        Credential credential = authorize();
-        return new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
+    // https://docs.google.com/spreadsheets/d/1py_1x30bHKuFWqOIp1ihouGJ5yTZgrZ0qOOyJSwOieo/edit#gid=0
+    String spreadsheetId = getSpreadsheetIDFromURL(
+        fileURL);//"1XrG7C9M-LKzh8tDR-Z6qAMGF_mbS1ydo4-lKO8bEXkc";
+    String range = "Sheet1!A1:Q";
+    ValueRange response = null;
+    try {
+      response = service.spreadsheets().values().get(spreadsheetId, range).execute();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
 
-    public String getSpreadsheetIDFromURL(String fileURL) {
-        String fileID = null;
+    List<List<Object>> values = response.getValues();
+    if (values == null || values.size() == 0) {
+      System.out.println("No data found.");
+    } else {
+      headers = values.get(0);
+      rowIterator = values.iterator();
+      rowIterator.next();
 
-        int indexOfDSlash = fileURL.indexOf("/d/");
-        int indexOfEditSlash = fileURL.indexOf("/edit");
-
-        int lengthOfURL = fileURL.length();
-
-        if (indexOfEditSlash == -1) {
-            fileID = fileURL.substring(indexOfDSlash + 3);
-        } else {
-            fileID = fileURL.substring(indexOfDSlash + 3, indexOfEditSlash);
-        }
-
-        return fileID;
-    }
-
-    public void importFileData(String fileURL) {
-        Sheets service = null;
-        try {
-            service = getSheetsService();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // https://docs.google.com/spreadsheets/d/1py_1x30bHKuFWqOIp1ihouGJ5yTZgrZ0qOOyJSwOieo/edit#gid=0
-        String spreadsheetId = getSpreadsheetIDFromURL(fileURL);//"1XrG7C9M-LKzh8tDR-Z6qAMGF_mbS1ydo4-lKO8bEXkc";
-        String range = "Sheet1!A1:Q";
-        ValueRange response = null;
-        try {
-            response = service.spreadsheets().values().get(spreadsheetId, range).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        List<List<Object>> values = response.getValues();
-        if (values == null || values.size() == 0) {
-            System.out.println("No data found.");
-        } else {
-            headers = values.get(0);
-            rowIterator = values.iterator();
-            rowIterator.next();
-
-            mapColumnID();
-            saveFileData();
+      mapColumnID();
+      saveFileData();
 
             /*for (List row : values) {
                 System.out.println(row);
             }*/
+    }
+  }
+
+  public void mapColumnID() {
+    for (int columnIndex = 0; columnIndex < headers.size(); columnIndex++) {
+      String headerContent = String.valueOf(headers.get(columnIndex));
+      int columnCode = Integer.parseInt(headerContent);
+
+      for (FileColumn column : FileColumn.values()) {
+        if (columnCode == column.getCode()) {
+          columnMapping.put(new Integer(columnIndex), column);
+          //   System.out.println(column + " " + columnIndex);
         }
+      }
     }
 
-    private List<Object> headers;
-    private Iterator< List<Object> > rowIterator;
+  }
 
-    public void mapColumnID() {
-        for (int columnIndex = 0; columnIndex < headers.size(); columnIndex++) {
-            String headerContent = String.valueOf(headers.get(columnIndex));
-            int columnCode = Integer.parseInt(headerContent);
+  public void saveFileData() {
+    while (rowIterator.hasNext()) {
+      List<Object> row = rowIterator.next();
+      FileColumnData columnData = new FileColumnData();
 
-            for (FileColumn column : FileColumn.values()) {
-                if (columnCode == column.getCode()) {
-                    columnMapping.put(new Integer(columnIndex), column);
-                 //   System.out.println(column + " " + columnIndex);
-                }
-            }
+      for (int columnIndex = 0; columnIndex < row.size(); columnIndex++) {
+        FileColumn columnCode = columnMapping.get(new Integer(columnIndex));
+        Object cell = row.get(columnIndex);
+        String cellValue = String.valueOf(cell);//cell.getStringCellValue();
+
+        if (cell != null) {
+          columnData.setDataFromColumnCode(columnCode, cellValue);
+        } else {
+          System.out.println(columnCode.toString());
         }
+      }
 
+      dataImport.addNewColumnData(columnData);
     }
-
-    public void saveFileData() {
-        while (rowIterator.hasNext()){
-            List<Object> row = rowIterator.next();
-            FileColumnData columnData = new FileColumnData();
-
-            for (int columnIndex = 0; columnIndex < row.size(); columnIndex++){
-                FileColumn columnCode = columnMapping.get(new Integer(columnIndex));
-                Object cell = row.get(columnIndex);
-                String cellValue = String.valueOf(cell);//cell.getStringCellValue();
-
-                if (cell != null){
-                    columnData.setDataFromColumnCode(columnCode, cellValue);
-                } else {
-                    System.out.println(columnCode.toString());
-                }
-            }
-
-            dataImport.addNewColumnData(columnData);
-        }
-    }
+  }
 }
