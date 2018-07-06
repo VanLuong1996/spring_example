@@ -27,10 +27,8 @@ public class TopicaImportController {
   private TopicaLogService topicaLogService;
 
   @GetMapping("/import")
-  public List<TopicaImport> get(@RequestHeader String sessionkey) {
+  public List<TopicaImport> get() {
     log.info("(get)");
-
-    //TODO: check session key
 
     List<TopicaImport> importList = topicaImportService.filter("", null, 0, 1000);
     log.info("size {}", importList.size());
@@ -38,20 +36,16 @@ public class TopicaImportController {
   }
 
   @GetMapping("/import/{Id}")
-  public TopicaImport getById(@RequestHeader String sessionkey, @PathVariable("Id") long id){
+  public TopicaImport getById(@PathVariable("Id") long id){
     log.info("(get import info)", id);
-
-    //TODO: check session key
 
     TopicaImport topicaImport = topicaImportService.findById(id);
     return topicaImport;
   }
 
   @PostMapping("/import")
-  public TopicaImport importFile(@RequestHeader String sessionkey, @Valid @RequestBody String path, @Valid @RequestBody FileImportType type){
+  public TopicaImport importFile(@Valid @RequestBody String path, @Valid @RequestBody FileImportType type){
     log.info("(import new file) {}", path, type);
-
-    //TODO: check session key
 
     TopicaImport import = topicaImportService.save(path, type);
     topicaCampaignService.extract(import.getId());
@@ -64,10 +58,8 @@ public class TopicaImportController {
   }
 
   @PutMapping("/import/{Id}")
-  public void changeImportedFile(@RequestHeader String sessionkey, @PathVariable("Id") long id, @Valid @RequestBody String path){
+  public void changeImportedFile(@PathVariable("Id") long id, @Valid @RequestBody String path){
     log.info("(update file) {}", id, path);
-
-    //TODO: check session key
 
     topicaImportService.update(id, path);
 
@@ -78,10 +70,8 @@ public class TopicaImportController {
   }
 
   @PutMapping("/import")
-  public void confirmFile(@RequestHeader String sessionkey, @RequestBody List<long> ids){
+  public void confirmFile(@RequestBody List<long> ids){
     log.info("(confirm files) {}", listIds);
-
-    //TODO: check session key
 
     topicaImportService.confirm(ids);
 

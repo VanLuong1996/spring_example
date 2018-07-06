@@ -19,38 +19,41 @@ public class TopicaCampaignController {
   @Autowired
   private TopicaCampaignService topicaCampaignService;
 
+  @Autowired
+  private TopicaLogService topicaLogService;
+
   @GetMapping("/campaign")
-  public List<TopicaCampaign> get(@RequestHeader String sessionkey) {
+  public List<TopicaCampaign> get() {
     log.info("(get)");
 
-    //TODO: check session key
     List<TopicaCampaign> campaigns = topicaCampaignService.filter("", null, 0, 1000);
     log.info("size {}", campaigns.size());
     return campaigns;
   }
 
   @GetMapping("/campaign/{id}")
-  public TopicaCampaign getById(@RequestHeader String sessionkey, @PathVariable long id) {
+  public TopicaCampaign getById(@PathVariable long id) {
     log.info("(get campaign) ", Id);
 
-    //TODO: check session key
     TopicaCampaign campaign = topicaCampaignService.findById(id);
     return campaign;
   }
 
   @PutMapping("/campaign")
-  public void mappingCampaign(@RequestHeader String sessionkey, @RequestBody List<TopicaCampaign> campaigns) {
+  public void mappingCampaign( @RequestBody List<TopicaCampaign> campaigns) {
     log.info("(mapping campaign) {}");
 
-    //TODO: check session key
+    //->get userId
+    //add log //action = MARKETER_UPDATE_CAMPAIGN_DETAIL
+    //log = new TopicaLog(createdBy, action, description);
+    //topicaLogService.save(log);
     topicaCampaignService.update(campaigns);
   }
 
   @GetMapping("/campaign")
-  public void report(@RequestHeader String sessionkey, @RequestParam long fromDate, @RequestParam long toDate){
+  public void report(@RequestParam long fromDate, @RequestParam long toDate){
     log.info("(insert) {}", name);
 
-    //TODO: check session key
     topicaCampaignService.report(fromDate, toDate);
   }
 }

@@ -19,7 +19,7 @@ public class TopicaLogController {
   private TopicaLogService topicaLogService;
 
   @GetMapping("/log")
-  public List<TopicaLog> get(@RequestHeader String sessionkey) {
+  public List<TopicaLog> get() {
     log.info("(get)");
     List<TopicaLog> logs = topicaLogService.filter("", null, 0, 1000);
     log.info("size {}", logs.size());
@@ -27,7 +27,7 @@ public class TopicaLogController {
   }
 
   @GetMapping("/log/{userId}")
-  public List<TopicaLog> getByUserId(@RequestHeader String sessionkey, @PathVariable("userId") long userId) {
+  public List<TopicaLog> getByUserId(@PathVariable("userId") long userId) {
     log.info("(get)");
     List<TopicaLog> logs = topicaLogService.findByUserId(userId);
     log.info("size {}", logs.size());
