@@ -1,5 +1,6 @@
 package vn.topica.sf18.queue.rabbitmq.impl;
 
+import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,7 @@ import vn.topica.sf18.model.topica.TopicaCampaign;
 import vn.topica.sf18.queue.TopicaCampaignQueue;
 
 @Service
-public class TopicaCampaignQueueRabbitmqImpl extends MyQueueRabbitmqImpl<TopicaCampaign> implements
-    TopicaCampaignQueue {
+public class TopicaCampaignQueueRabbitmqImpl implements TopicaCampaignQueue {
 
   @Value("${app.queue.campaign}")
   private String queueName;
@@ -18,9 +18,15 @@ public class TopicaCampaignQueueRabbitmqImpl extends MyQueueRabbitmqImpl<TopicaC
   @Autowired
   private RabbitTemplate rabbitTemplate;
 
-  @PostConstruct
-  public void postConstructor() {
-    super.queueName = queueName;
-    super.rabbitTemplate = rabbitTemplate;
+  @Override
+  public void push(TopicaCampaign message) {
+    rabbitTemplate.convertAndSend(queueName, message);
+  }
+
+  @Override
+  public void push(List<TopicaCampaign> messages) {
+    for(TopicaCampaign topicaImport: messages){
+      push(topicaImport);
+    }
   }
 }

@@ -10,7 +10,7 @@ public interface TopicaImportService extends BaseService<TopicaImport, Long> {
   TopicaImport getImportFileInfo(Long fileId);
 
   //import file
-  TopicaImport importFile(String path, String url, FileImportType fileImportType);
+  TopicaImport process(String path, String url, FileImportType fileImportType);
 
   //xem trang thai cua viec import
   FileImportStatus getFileImportStatus(Long fileId);

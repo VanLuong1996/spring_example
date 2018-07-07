@@ -6,11 +6,11 @@
 
   <groupId>vn.topica.sf18</groupId>
   <artifactId>olm-server</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
   <modules>
     <module>olm-api</module>
     <module>olm-common</module>
-    <module>olm-mysql</module>
+    <module>olm-common-sql</module>
     <module>olm-import-excel</module>
     <module>olm-queue</module>
     <module>olm-queue-rabbitmq</module>
@@ -59,7 +59,7 @@
 
       <dependency>
         <groupId>vn.topica.sf18</groupId>
-        <artifactId>olm-mysql</artifactId>
+        <artifactId>olm-common-sql</artifactId>
         <version>${project.version}</version>
       </dependency>
 
