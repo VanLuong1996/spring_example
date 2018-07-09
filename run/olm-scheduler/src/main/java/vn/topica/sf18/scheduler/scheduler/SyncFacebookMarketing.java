@@ -47,7 +47,7 @@ public class SyncFacebookMarketing {
         for (AdAccount adAccount : accounts) {
           log.info("adAccount {}", adAccount);
 
-//          exploreAccount(adAccount);
+          exploreAccount(adAccount);
         }
 
         accounts = accounts.nextPage();
@@ -63,6 +63,7 @@ public class SyncFacebookMarketing {
     while (campaigns != null) {
       for (Campaign campaign : campaigns) {
         log.info("campaign {}", campaign);
+        exploreCampaign(campaign);
       }
 
       campaigns = campaigns.nextPage();
