@@ -3,17 +3,16 @@ package vn.topica.sf18.sql.service.impl.topica;
 import java.util.List;
 import java.util.function.Function;
 import lombok.extern.slf4j.Slf4j;
-import net.friend.common.spring.boot.generic.specification.GenericSpecificationsBuilder;
-import net.friend.common.spring.boot.generic.specification.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import vn.topica.sf18.constant.FileImportStatus;
-import vn.topica.sf18.constant.FileImportType;
+import vn.topica.sf18.generic.specification.GenericSpecificationsBuilder;
+import vn.topica.sf18.generic.specification.SearchCriteria;
 import vn.topica.sf18.model.topica.TopicaImport;
-import vn.topica.sf18.sql.repository.topica.TopicaImportRepository;
 import vn.topica.sf18.service.topica.TopicaImportService;
+import vn.topica.sf18.sql.repository.topica.TopicaImportRepository;
 import vn.topica.sf18.sql.specification.BaseSpecification;
 
 @Service

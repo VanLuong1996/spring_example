@@ -25,7 +25,7 @@ public class TopicaCampaignDataController {
   @Autowired
   private TopicaLogService topicaLogService;
 
-  @GetMapping("/campaign")
+  @GetMapping("/campaignData")
   public List<TopicaCampaignData> filter(Principal principal, @RequestParam String search,
       @RequestParam int pageIndex, @RequestParam int pageSize) {
     log.info("(filter) {} {} {} {}", principal.getName(), search, pageIndex, pageSize);

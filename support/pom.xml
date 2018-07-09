@@ -19,5 +19,6 @@
     <module>olm-queue</module>
     <module>olm-queue-rabbitmq</module>
     <module>olm-queue-redis</module>
+    <module>olm-generic-specification</module>
   </modules>
 </project>

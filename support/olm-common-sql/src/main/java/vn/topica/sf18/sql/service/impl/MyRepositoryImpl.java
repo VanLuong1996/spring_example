@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.function.Function;
 import javax.persistence.EntityManager;
-import net.friend.common.spring.boot.generic.specification.GenericSpecificationsBuilder;
-import net.friend.common.spring.boot.generic.specification.SearchCriteria;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import vn.topica.sf18.generic.specification.GenericSpecificationsBuilder;
+import vn.topica.sf18.generic.specification.SearchCriteria;
 import vn.topica.sf18.sql.repository.MyRepository;
 import vn.topica.sf18.sql.specification.BaseSpecification;
 

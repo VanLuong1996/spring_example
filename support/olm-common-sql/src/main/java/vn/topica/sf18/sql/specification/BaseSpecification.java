@@ -6,9 +6,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import net.friend.common.spring.boot.generic.specification.GenericSpecification;
-import net.friend.common.spring.boot.generic.specification.SearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
+import vn.topica.sf18.generic.specification.GenericSpecification;
+import vn.topica.sf18.generic.specification.SearchCriteria;
 
 @AllArgsConstructor
 @NoArgsConstructor
