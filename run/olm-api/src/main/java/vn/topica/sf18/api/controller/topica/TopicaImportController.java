@@ -46,7 +46,7 @@ public class TopicaImportController {
     return importList;
   }
 
-  @GetMapping("/import/{Id}")
+  @GetMapping("/import/{id}")
   public TopicaImport findById(Principal principal, @PathVariable long id) {
     log.info("(findById) {} {}", principal.getName(), id);
     TopicaLog topicaLog = TopicaLog.of(principal.getName(), UserAction.USER_FIND_BY_ID_IMPORT_FILE, Long.toString(id));
