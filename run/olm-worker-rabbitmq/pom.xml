@@ -14,7 +14,7 @@
   <dependencies>
     <dependency>
       <groupId>vn.topica.sf18</groupId>
-      <artifactId>olm-common</artifactId>
+      <artifactId>olm-common-sql</artifactId>
     </dependency>
 
     <dependency>

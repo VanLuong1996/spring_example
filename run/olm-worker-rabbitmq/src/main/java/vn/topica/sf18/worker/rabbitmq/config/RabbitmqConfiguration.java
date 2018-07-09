@@ -48,12 +48,4 @@ public class RabbitmqConfiguration {
 
     return factory;
   }
-
-  @Bean
-  public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-    RabbitTemplate template = new RabbitTemplate(connectionFactory);
-    template.setMessageConverter(new Jackson2JsonMessageConverter());
-    return template;
-  }
-
 }
