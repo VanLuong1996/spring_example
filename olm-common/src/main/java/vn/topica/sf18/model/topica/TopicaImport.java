@@ -18,6 +18,15 @@ public class TopicaImport extends BaseModel {
 
   private FileImportType type;
 
+  public static TopicaImport ofGExcel(String path){
+    TopicaImport topicaImport = new TopicaImport();
+    topicaImport.setPath(path);
+    topicaImport.setStatus(FileImportStatus.UPLOADED);
+    topicaImport.setType(FileImportType.EXCEL);
+
+    return topicaImport;
+  }
+
   public static TopicaImport ofGAC(String path) {
     TopicaImport topicaImport = new TopicaImport();
     topicaImport.setPath(path);

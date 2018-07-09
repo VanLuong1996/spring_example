@@ -1,24 +1,12 @@
 package vn.topica.sf18.service.topica;
 
 import vn.topica.sf18.constant.FileImportStatus;
-import vn.topica.sf18.constant.FileImportType;
 import vn.topica.sf18.model.topica.TopicaImport;
 import vn.topica.sf18.service.BaseService;
 
 public interface TopicaImportService extends BaseService<TopicaImport, Long> {
 
-  TopicaImport getImportFileInfo(Long fileId);
+  int updatePath(long id, String path);
 
-  //import file
-  TopicaImport process(String path, String url, FileImportType fileImportType);
-
-  //xem trang thai cua viec import
-  FileImportStatus getFileImportStatus(Long fileId);
-
-  //update lai du lieu import
-  TopicaImport updateImportedFile(Long fileId, String path, String url);
-
-  //manager xac nhan (confirm) thay doi du lieu
-  TopicaImport confirmChangedData(Long id, Long managerId);
-
+  int updateStatus(long id, FileImportStatus status);
 }

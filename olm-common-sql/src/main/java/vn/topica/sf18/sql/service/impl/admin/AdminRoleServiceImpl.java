@@ -1,12 +1,18 @@
 package vn.topica.sf18.sql.service.impl.admin;
 
 import java.util.List;
+import java.util.function.Function;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.friend.common.spring.boot.generic.specification.GenericSpecificationsBuilder;
+import net.friend.common.spring.boot.generic.specification.SearchCriteria;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import vn.topica.sf18.model.admin.AdminRole;
 import vn.topica.sf18.sql.repository.admin.AdminRoleRepository;
 import vn.topica.sf18.service.admin.AdminRoleService;
+import vn.topica.sf18.sql.specification.BaseSpecification;
 
 @AllArgsConstructor
 @Service
@@ -31,14 +37,20 @@ public class AdminRoleServiceImpl implements AdminRoleService {
   }
 
   @Override
-  public Iterable<AdminRole> findByIds(Iterable<Long> ids) {
-    return null;
-//    return adminRoleRepository.findAllById(ids);
+  public AdminRole findById(Long id) {
+    return adminRoleRepository.findOne(id);
   }
 
   @Override
-  public List<AdminRole> filter(String search, Long userId, int pageIndex, int pageSize) {
-    return null;
-//    return adminRoleRepository.filter(search, userId, pageIndex, pageSize);
+  public Iterable<AdminRole> findByIds(Iterable<Long> ids) {
+    return adminRoleRepository.findByIds(ids);
+  }
+
+  @Override
+  public List<AdminRole> filter(String search, String username, int pageIndex, int pageSize) {
+    GenericSpecificationsBuilder<AdminRole> builder = new GenericSpecificationsBuilder<>();
+    Function<SearchCriteria, Specification<AdminRole>> converter = BaseSpecification::new;
+    Specification<AdminRole> spec = builder.build(converter, search);
+    return adminRoleRepository.findAll(spec, new PageRequest(pageIndex - 1, pageSize)).getContent();
   }
 }
