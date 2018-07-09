@@ -6,18 +6,10 @@
 
   <groupId>vn.topica.sf18</groupId>
   <artifactId>olm-server</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
   <modules>
-    <module>olm-api</module>
-    <module>olm-common</module>
-    <module>olm-mysql</module>
-    <module>olm-import-excel</module>
-    <module>olm-queue</module>
-    <module>olm-queue-rabbitmq</module>
-    <module>olm-queue-redis</module>
-    <module>olm-scheduler</module>
-    <module>olm-worker-rabbitmq</module>
-    <module>olm-worker-redis</module>
+    <module>support</module>
+    <module>run</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -59,7 +51,7 @@
 
       <dependency>
         <groupId>vn.topica.sf18</groupId>
-        <artifactId>olm-mysql</artifactId>
+        <artifactId>olm-common-sql</artifactId>
         <version>${project.version}</version>
       </dependency>
 

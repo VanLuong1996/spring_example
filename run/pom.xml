@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>olm-server</artifactId>
+    <groupId>vn.topica.sf18</groupId>
+    <version>1.2-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>run</artifactId>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>olm-api</module>
+    <module>olm-scheduler</module>
+    <module>olm-worker-rabbitmq</module>
+    <module>olm-worker-redis</module>
+  </modules>
+</project>

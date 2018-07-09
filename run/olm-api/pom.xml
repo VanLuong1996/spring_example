@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>run</artifactId>
+    <groupId>vn.topica.sf18</groupId>
+    <version>1.2-SNAPSHOT</version>
+
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>olm-api</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>vn.topica.sf18</groupId>
+      <artifactId>olm-common-sql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>vn.topica.sf18</groupId>
+      <artifactId>olm-queue-rabbitmq</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security.oauth</groupId>
+      <artifactId>spring-security-oauth2</artifactId>
+    </dependency>
+
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>spring-snapshot</id>
+      <url>http://repo.spring.io/snapshot</url>
+    </repository>
+  </repositories>
+</project>
