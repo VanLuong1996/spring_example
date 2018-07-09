@@ -8,16 +8,8 @@
   <artifactId>olm-server</artifactId>
   <version>1.2-SNAPSHOT</version>
   <modules>
-    <module>olm-api</module>
-    <module>olm-common</module>
-    <module>olm-common-sql</module>
-    <module>olm-import-excel</module>
-    <module>olm-queue</module>
-    <module>olm-queue-rabbitmq</module>
-    <module>olm-queue-redis</module>
-    <module>olm-scheduler</module>
-    <module>olm-worker-rabbitmq</module>
-    <module>olm-worker-redis</module>
+    <module>support</module>
+    <module>run</module>
   </modules>
   <packaging>pom</packaging>
 
