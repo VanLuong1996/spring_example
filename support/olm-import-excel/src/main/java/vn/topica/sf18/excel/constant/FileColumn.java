@@ -1,15 +1,15 @@
 package vn.topica.sf18.excel.constant;
 
 public enum FileColumn {
-  Date(3345),
-  Campaign(3356),
-  CampaignID(3360),
+  Date(3345, "Day"),
+  Campaign(3356, "Campaign"),
+  CampaignID(3360, "Campaign ID"),
   Account(3371),
   AccountID(3382),
-  Currency(3393),
-  Impression(3404),
-  Click(3415),
-  Amount(3426),
+  Currency(3393, "Currency"),
+  Impression(3404, "Impressions"),
+  Click(3415, "Clicks"),
+  Amount(3426, "Cost"),
   DateMonth(3430),
   DateYear(3441),
   Kenh(3452),
@@ -22,11 +22,22 @@ public enum FileColumn {
 
   private int code;
 
+  private String name;
+
   FileColumn(int Code) {
     code = Code;
   }
 
+  FileColumn(int Code, String Name) {
+    code = Code;
+    name = Name;
+  }
+
   public int getCode() {
     return this.code;
+  }
+
+  public String getName() {
+    return this.name;
   }
 }

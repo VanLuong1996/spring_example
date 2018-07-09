@@ -28,4 +28,5 @@ public class TopicaCampaign {
   private TopicaLegal legal;
 
   private TopicaActivity activity;
+
 }
