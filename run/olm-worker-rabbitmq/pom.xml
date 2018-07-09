@@ -18,6 +18,11 @@
     </dependency>
 
     <dependency>
+      <groupId>vn.topica.sf18</groupId>
+      <artifactId>olm-import-excel</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-amqp</artifactId>
     </dependency>

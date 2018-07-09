@@ -57,6 +57,12 @@
 
       <dependency>
         <groupId>vn.topica.sf18</groupId>
+        <artifactId>olm-import-excel</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>vn.topica.sf18</groupId>
         <artifactId>olm-generic-specification</artifactId>
         <version>${project.version}</version>
       </dependency>
